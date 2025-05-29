@@ -31,12 +31,8 @@ let value = ref('')
 
 <style>
 .p-inputotp-input {
-  /* background: ; */
-  border: none;
-  background: #f1f1f1;
-  box-shadow: 0 4px 4px #00000025;
-}
-.p-inputotp-input:focus {
-  background: red !;
+  border: none !important;
+  background: #f1f1f1 !important;
+  box-shadow: 0 4px 4px #00000025 !important;
 }
 </style>
