@@ -1,7 +1,7 @@
 <template>
-  <LazyAuthBackSection></LazyAuthBackSection>
+  <AuthBackSection></AuthBackSection>
   <div class="container">
-    <LazyAuthInsertPhone @showOtpEmit="showOtp = true" v-if="!showOtp"></LazyAuthInsertPhone>
+    <AuthInsertPhone @showOtpEmit="showOtp = true" v-if="!showOtp"></AuthInsertPhone>
     <AuthInsertOtp v-else></AuthInsertOtp>
   </div>
 </template>
