@@ -1,7 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from "@tailwindcss/vite";
+import Aura from '@primeuix/themes/aura';
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      bodyAttrs: {
+        dir: 'rtl'
+      }
+    }
+  },
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
   vite: {
@@ -9,5 +17,21 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-    css: ['~/assets/main.css'],
+  css: ['~/assets/main.css'],
+  modules: ['@primevue/nuxt-module', '@nuxt/image'],
+  primevue: {
+    options: {
+      theme: {
+        preset: Aura,
+        options: {
+          prefix: 'p',
+          darkModeSelector: 'none',
+          cssLayer: false,
+        },
+      }
+    }
+  },
+  image: {
+    quality: 50
+  }
 })

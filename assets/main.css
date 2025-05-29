@@ -1,1 +1,42 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "PeydaWebFaNum-Medium";
+    src: url("/public/fonts/woff/PeydaWebFaNum-Medium.woff") format('woff');
+}
+
+@font-face {
+    font-family: "PeydaWebFaNum-Bold";
+    src: url("/public/fonts/woff/PeydaWebFaNum-Bold.woff") format('woff');
+}
+
+*{
+    outline: none;
+}
+
+@theme {
+    --font-sans: "PeydaWebFaNum-Medium";
+    --font-peydaB: "PeydaWebFaNum-Bold";
+    --text-2sm : 10px;
+}
+
+@utility container {
+    margin: auto;
+    padding-inline: 1rem;
+
+    @variant sm {
+        padding-inline: 2rem;
+    }
+
+    @variant lg {
+        padding-inline: 4rem;
+    }
+
+    @variant xl {
+        padding-inline: 5rem;
+    }
+
+    @variant 2xl {
+        padding-inline: 6rem;
+    }
+}
