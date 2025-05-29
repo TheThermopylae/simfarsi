@@ -1,8 +1,8 @@
 <template>
   <LazyAuthBackSection></LazyAuthBackSection>
   <div class="container">
-    <!-- <LazyAuthInsertPhone></LazyAuthInsertPhone> -->
-    <AuthInsertOtp></AuthInsertOtp>
+    <LazyAuthInsertPhone @showOtpEmit="showOtp = true" v-if="!showOtp"></LazyAuthInsertPhone>
+    <AuthInsertOtp v-else></AuthInsertOtp>
   </div>
 </template>
 
@@ -14,4 +14,6 @@ useHead({
 definePageMeta({
   layout : false
 })
+
+let showOtp = ref(false)
 </script>

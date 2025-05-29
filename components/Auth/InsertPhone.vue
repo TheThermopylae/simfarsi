@@ -16,7 +16,7 @@
       placeholder="شماره موبایل"
       class="border border-[#6E6D6D] rounded w-full mt-20 mb-10 p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
     />
-    <button class="bg-black text-white rounded w-full p-2 text-xs">
+    <button @click="$emit('showOtpEmit')" class="bg-black text-white rounded w-full p-2 text-xs">
       ورود به سیم شاپ
     </button>
     <p class="text-center text-[10px] mt-10">
