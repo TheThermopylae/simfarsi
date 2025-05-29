@@ -1,4 +1,5 @@
 <template>
+  <HeaderTheHeader></HeaderTheHeader>
   <slot></slot>
-  <NavLinks></NavLinks>
+  <NavLinks></NavLinks> 
 </template>

@@ -3,21 +3,28 @@
 @font-face {
     font-family: "PeydaWebFaNum-Medium";
     src: url("/public/fonts/woff/PeydaWebFaNum-Medium.woff") format('woff');
+  font-display: swap;
+    
 }
 
 @font-face {
     font-family: "PeydaWebFaNum-Bold";
     src: url("/public/fonts/woff/PeydaWebFaNum-Bold.woff") format('woff');
+  font-display: swap;
+    
 }
 
-*{
+* {
     outline: none;
 }
 
 @theme {
     --font-sans: "PeydaWebFaNum-Medium";
     --font-peydaB: "PeydaWebFaNum-Bold";
-    --text-2sm : 10px;
+    --text-2sm: 10px;
+
+    --color-primary: #010562;
+    --color-sec: #EFEFEF;
 }
 
 @utility container {
@@ -39,4 +46,13 @@
     @variant 2xl {
         padding-inline: 6rem;
     }
+}
+
+.p-button {
+    background: black !important;
+    border: none !important;
+}
+
+.shadow-c{
+    box-shadow: 0 4px 4px 0 #00000008;
 }
