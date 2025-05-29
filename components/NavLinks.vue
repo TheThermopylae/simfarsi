@@ -3,7 +3,7 @@
     <div class="bg-[#F4F4F4] p-3 rounded-full shadow flex justify-between">
       <NuxtLink
         active-class="text-black"
-        to="/"
+        to="/auth"
         class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
       >
         <svg
