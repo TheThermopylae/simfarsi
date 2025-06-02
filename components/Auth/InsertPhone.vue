@@ -10,20 +10,60 @@
       alt="insert-phone"
       class="w-2/3 block m-auto"
     ></NuxtImg>
-    <input
-      type="number"
-      id="phone-number"
-      placeholder="شماره موبایل"
-      class="border border-[#6E6D6D] rounded w-full mt-20 mb-10 p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
-    />
-    <button @click="$emit('showOtpEmit')" class="bg-black text-white rounded w-full p-2 text-xs">
-      ورود به سیم شاپ
-    </button>
+    <form @submit.prevent="sendPhone">
+      <input
+        v-model="phone"
+        type="number"
+        id="phone-number"
+        placeholder="شماره موبایل"
+        class="border border-[#6E6D6D] rounded w-full mt-20 mb-10 p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
+      />
+      <button class="bg-black text-white rounded w-full p-2 text-xs">
+        ورود به سیم شاپ
+      </button>
+    </form>
     <p class="text-center text-[10px] mt-10">
       <NuxtLink to="/" class="font-peydaB">شرایط و قوانین استفاده</NuxtLink>
       و
       <NuxtLink to="/" class="font-peydaB">سیاست نامه حریم خصوصی</NuxtLink>
       سیم شاپ را میپذیرم
     </p>
+    <Toast />
   </section>
 </template>
+
+<script setup>
+const toast = useToast()
+let config = useRuntimeConfig()
+
+let emit = defineEmits(['showOtpEmit'])
+
+let phone = ref('')
+
+async function sendPhone () {
+  try {
+    if (!phone.value) {
+      toast.add({
+        severity: 'error',
+        summary: 'خطا',
+        detail: 'لطفا شماره موبایل خود را وارد کنید',
+        life: 5000
+      })
+    } else {
+      let data = await $fetch(`http://localhost:4000/auth/register`, {
+        method: 'POST',
+        body: { phone: '09905457180' }
+      })
+
+      emit('showOtpEmit', phone.value)
+    }
+  } catch (err) {
+    toast.add({
+      severity: 'error',
+      summary: 'خطا',
+      detail: err,
+      life: 5000
+    })
+  }
+}
+</script>

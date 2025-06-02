@@ -1,5 +1,5 @@
 <template>
-  <section class="container fixed left-1/2 -translate-x-1/2 bottom-8 z-10">
+  <section class="container fixed left-1/2 -translate-x-1/2 bottom-3 z-10">
     <div class="bg-[#F4F4F4] p-3 rounded-full shadow flex justify-between">
       <NuxtLink
         active-class="text-black"
@@ -25,7 +25,7 @@
       </NuxtLink>
       <NuxtLink
         active-class="text-black"
-        to="/"
+        to="/admin-panel/users"
         class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
       >
         <svg

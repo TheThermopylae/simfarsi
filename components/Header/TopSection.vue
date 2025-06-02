@@ -3,11 +3,12 @@
     <div class="flex">
       <Button
         type="button"
-        @click="toggle"
+        @click="visible = true"
         aria-haspopup="true"
         aria-controls="overlay_menu"
         unstyled
         class="flex ml-5"
+        style="background: white !important;"
       >
         <template #icon>
           <svg
@@ -74,32 +75,20 @@
       </svg>
     </div>
     <!-- <NuxtImg src="/logo.svg" alt="logo" class="w-1/3"></NuxtImg> -->
-    <h1 class="text-primary font-peydaB text-xl">
+    <h1 class="text-c-primary font-peydaB text-xl">
       Simcart<span class="text-black">.shop</span>
     </h1>
   </div>
-  <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
+  <Drawer v-model:visible="visible" header="Right Drawer" position="right">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
+  </Drawer>
 </template>
 
 <script setup>
-const menu = ref()
-const items = ref([
-  {
-    label: 'Options',
-    items: [
-      {
-        label: 'Refresh',
-        icon: 'pi pi-refresh'
-      },
-      {
-        label: 'Export',
-        icon: 'pi pi-upload'
-      }
-    ]
-  }
-])
-
-const toggle = event => {
-  menu.value.toggle(event)
-}
+let visible = ref(false)
 </script>

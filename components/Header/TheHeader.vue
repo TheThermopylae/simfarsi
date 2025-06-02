@@ -5,11 +5,13 @@
       <div class="flex items-end gap-1 px-2">
         <div class="mt-5 relative flex-grow">
           <input
+            v-model="searchValue"
             type="text"
             placeholder="جستجو"
             class="bg-sec w-full p-2 rounded-md placeholder:relative placeholder:right-12 placeholder:text-black"
           />
           <svg
+            v-if="!searchValue"
             class="absolute top-1/2 -translate-y-1/2 right-7"
             width="16"
             height="16"
@@ -23,7 +25,11 @@
             />
           </svg>
         </div>
-        <Button class="p-0 w-10 h-10">
+        <Button
+          @click="visibleBottom = true"
+          class="p-0 w-10 h-10"
+          :pt="{ root: '!bg-black !border-0' }"
+        >
           <template #icon>
             <svg
               width="19"
@@ -41,5 +47,65 @@
         </Button>
       </div>
     </div>
+    <Drawer
+      v-model:visible="visibleBottom"
+      header="فیلتر"
+      position="bottom"
+      style="height: auto"
+      :pt="{
+        header: '!pt-6',
+        title: '!text-[20px]',
+        root: '!rounded-t-[50px]'
+      }"
+    >
+      <template #closebutton>
+        <button class="btn-c px-5 py-1">حذف فیلتر</button>
+      </template>
+      <div>
+        <h4 class="text-gray-400 text-xs">دسته بندی ها</h4>
+        <HeaderCategorySlider />
+      </div>
+      <div class="my-5">
+        <h4 class="mb-2">رنج قیمت</h4>
+        <Slider
+          :pt="{
+            root: '!w-full',
+            range: '!bg-black'
+          }"
+          v-model="value"
+          range
+          class="w-56"
+        />
+      </div>
+      <div class="my-5">
+        <h4 class="text-gray-400 mb-2 text-xs">جستجویی سیم مشابه</h4>
+        <div class="flex gap-1 justify-center">
+          <InputOtp
+            pt:root="!gap-1"
+            v-model="numberValue"
+            :length="7"
+            style="direction: ltr"
+            integerOnly
+          />
+          <span class="border border-[#EAEAEA] py-1 px-4 rounded">0912</span>
+        </div>
+      </div>
+    </Drawer>
   </header>
 </template>
+
+<script setup>
+let searchValue = ref('')
+
+const visibleBottom = ref(false)
+const value = ref([20, 80])
+let numberValue = ref(null)
+</script>
+<style scoped>
+.flex >>> .p-inputotp-input {
+  background: #e9e9e9 !important;
+  border: none !important;
+  width: 35px !important;
+  height: 35px !important;
+}
+</style>

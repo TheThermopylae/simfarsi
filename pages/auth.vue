@@ -1,19 +1,40 @@
 <template>
+  <Toast />
   <AuthBackSection></AuthBackSection>
   <div class="container">
-    <AuthInsertPhone @showOtpEmit="showOtp = true" v-if="!showOtp"></AuthInsertPhone>
-    <AuthInsertOtp v-else></AuthInsertOtp>
+    <AuthInsertPhone
+      @showOtpEmit="showOtpFunc"
+      v-if="!showOtp"
+    ></AuthInsertPhone>
+    <AuthInsertOtp :phone="phone" v-else></AuthInsertOtp>
   </div>
 </template>
 
 <script setup>
+const toast = useToast()
+
 useHead({
   title: 'ورود به حساب کاربری'
 })
 
+let phone = ref('')
+
 definePageMeta({
-  layout : false
+  layout: false
 })
 
 let showOtp = ref(false)
+
+function showOtpFunc (item) {
+  phone.value = item
+
+  toast.add({
+    severity: 'success',
+    summary: 'موفقیت آمیز',
+    detail: 'کد پیامک شده را وارد کنید',
+    life: 5000
+  })
+
+  showOtp.value = true
+}
 </script>

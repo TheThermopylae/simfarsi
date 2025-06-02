@@ -33,5 +33,11 @@ export default defineNuxtConfig({
   },
   image: {
     quality: 50
-  }
+  },
+    runtimeConfig: {
+    API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3000/',
+    public: {
+      API_BASE_URL: process.env.API_BASE_URL
+    },
+  },
 })

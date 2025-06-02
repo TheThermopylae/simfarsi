@@ -1,17 +1,22 @@
 @import "tailwindcss";
+/* @plugin "daisyui"; */
+
+@plugin "daisyui" {
+    themes: light --default;
+}
 
 @font-face {
     font-family: "PeydaWebFaNum-Medium";
     src: url("/public/fonts/woff/PeydaWebFaNum-Medium.woff") format('woff');
-  font-display: swap;
-    
+    font-display: swap;
+
 }
 
 @font-face {
     font-family: "PeydaWebFaNum-Bold";
     src: url("/public/fonts/woff/PeydaWebFaNum-Bold.woff") format('woff');
-  font-display: swap;
-    
+    font-display: swap;
+
 }
 
 * {
@@ -22,8 +27,7 @@
     --font-sans: "PeydaWebFaNum-Medium";
     --font-peydaB: "PeydaWebFaNum-Bold";
     --text-2sm: 10px;
-
-    --color-primary: #010562;
+    --color-c-primary: #010562;
     --color-sec: #EFEFEF;
 }
 
@@ -48,11 +52,27 @@
     }
 }
 
-.p-button {
-    background: black !important;
-    border: none !important;
+input {
+    @apply block bg-white w-full rounded p-2 border border-black
 }
 
-.shadow-c{
+.shadow-c {
     box-shadow: 0 4px 4px 0 #00000008;
+}
+
+.btn-c{
+    @apply bg-black text-white rounded
+}
+
+/* PrimeVue Theming */
+.p-toast {
+  @apply !w-11/12 !max-w-[350px]
+}
+
+.p-toast-close-button, .p-toast-close-icon {
+  display: none !important;
+}
+
+.p-toast-message {
+  box-shadow: none !important;
 }
