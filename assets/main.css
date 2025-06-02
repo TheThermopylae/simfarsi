@@ -52,27 +52,31 @@
     }
 }
 
-input {
+.cinput {
     @apply block bg-white w-full rounded p-2 border border-black
+}
+
+.primary{
+    @apply bg-black text-white
 }
 
 .shadow-c {
     box-shadow: 0 4px 4px 0 #00000008;
 }
 
-.btn-c{
+.btn-c {
     @apply bg-black text-white rounded
 }
 
 /* PrimeVue Theming */
 .p-toast {
-  @apply !w-11/12 !max-w-[350px]
+    @apply !w-11/12 !max-w-[350px]
 }
 
 .p-toast-close-button, .p-toast-close-icon {
-  display: none !important;
+    display: none !important;
 }
 
 .p-toast-message {
-  box-shadow: none !important;
+    box-shadow: none !important;
 }

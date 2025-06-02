@@ -66,8 +66,9 @@
         <HeaderCategorySlider />
       </div>
       <div class="my-5">
-        <h4 class="mb-2">رنج قیمت</h4>
+        <h4 class="mb-3">رنج قیمت</h4>
         <Slider
+          style="direction: ltr"
           :pt="{
             root: '!w-full',
             range: '!bg-black'
@@ -75,10 +76,16 @@
           v-model="value"
           range
           class="w-56"
+          :min="0"
+          :max="10000"
         />
+        <div class="flex justify-between mt-2">
+          <span>{{ value[1] }}$</span>
+          <span>{{ value[0] }}$</span>
+        </div>
       </div>
       <div class="my-5">
-        <h4 class="text-gray-400 mb-2 text-xs">جستجویی سیم مشابه</h4>
+        <h4 class="mb-3 text-xs">جستجویی سیم مشابه</h4>
         <div class="flex gap-1 justify-center">
           <InputOtp
             pt:root="!gap-1"
@@ -90,6 +97,15 @@
           <span class="border border-[#EAEAEA] py-1 px-4 rounded">0912</span>
         </div>
       </div>
+      <div class="my-5">
+        <label for="status" class="mb-3 block text-xs">وضعیت</label>
+        <input type="text" id="status" class="bg-[#F4F4F4] w-full p-2 rounded" />
+      </div>
+      <div class="my-5">
+        <label for="type" class="mb-3 block text-xs">نوع رند</label>
+        <input type="text" id="type" class="bg-[#F4F4F4] w-full p-2 rounded" />
+      </div>
+      <button class="w-full rounded-full primary p-4 mt-7">اعمال فیلترها</button>
     </Drawer>
   </header>
 </template>

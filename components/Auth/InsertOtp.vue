@@ -12,7 +12,7 @@
     <p class="text-center my-8 text-2sm">درخواست مجدد (00:30)</p>
     <form @submit.prevent="sendOtp">
       <div class="flex justify-center mb-9">
-        <InputOtp v-model="otp" :length="5" style="direction: ltr" />
+        <InputOtp v-model="otp" :length="5" style="direction: ltr" integer-only />
       </div>
       <button class="bg-black text-white rounded w-full p-2 text-xs">
         ورود به سیم شاپ
@@ -53,7 +53,7 @@ async function sendOtp () {
 }
 </script>
 
-<style>
+<style scoped>
 :deep(.p-inputotp-input) {
   border: none !important;
   background: #f1f1f1 !important;
