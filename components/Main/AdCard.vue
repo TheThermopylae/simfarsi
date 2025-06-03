@@ -1,9 +1,11 @@
 <template>
-  <article class="border-b border-gray-300 pb-3 mb-3 last:pb-0 last:mb-0 last:border-0">
+  <article
+    class="border-b border-gray-300 pb-3 mb-3 last:pb-0 last:mb-0 last:border-0"
+  >
     <div class="flex justify-between items-center container">
       <div>
         <h4 class="flex items-center text-xl gap-1">
-          09121077650
+          {{ props.data.title }}
           <svg
             width="17"
             height="16"
@@ -48,16 +50,22 @@
               fill="#919191"
             />
           </svg>
-          <h4>فروشگاه : ZarreTell</h4>
+          <h4>فروشگاه : {{ props.data.customername }}</h4>
         </div>
-        <p class="text-[7px] text-[#919191]">قیمت : 20,500,000 تومان</p>
+        <p class="text-[7px] text-[#919191]">
+          قیمت : {{ props.data.price.toLocaleString() }} تومان
+        </p>
         <div class="flex mt-2 text-2sm gap-0.5">
-            <span class="border-l border-[#919191] pl-0.5">کارکرده</span>
-            <span class="border-l border-[#919191] pl-0.5">نقد و اقساط</span>
-            <span>سرمایه گذاری</span>
+          <span class="border-l border-[#919191] pl-0.5">کارکرده</span>
+          <span class="border-l border-[#919191] pl-0.5">نقد و اقساط</span>
+          <span>سرمایه گذاری</span>
         </div>
       </div>
-      <div class="w-[91px] h-[92px] bg-[#D9D9D9] rounded-xl"></div>
+      <img :src="`${$config.public.API_BASE_URL}${props.data.img}`" class="w-[91px] h-[92px] rounded-md" alt="" />
     </div>
   </article>
 </template>
+
+<script setup>
+let props = defineProps(['data'])
+</script>

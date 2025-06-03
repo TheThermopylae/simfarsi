@@ -3,3 +3,9 @@
     <NuxtPage></NuxtPage>
   </NuxtLayout>
 </template>
+
+<script setup>
+useHead({
+  titleTemplate : 'سیمکارت شاپ %s'
+})
+</script>

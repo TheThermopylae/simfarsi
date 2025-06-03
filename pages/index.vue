@@ -1,13 +1,15 @@
 <template>
-  <MainTheCategories></MainTheCategories>
-  <MainBestShops></MainBestShops>
   <div class="container">
-    <nuxtImg
-      src="/main/Iphone15.svg"
-      alt="banner"
-      class="w-full mt-5"
-    ></nuxtImg>
+    <MainHeroSlider></MainHeroSlider>
   </div>
+  <MainTheCategories></MainTheCategories>
+  <!-- <MainBestShops></MainBestShops> -->
   <MainAmazingSection></MainAmazingSection>
   <MainAdSection></MainAdSection>
 </template>
+
+<script setup>
+useHead({
+  title: '| صفحه اصلی'
+})
+</script>

@@ -1,4 +1,4 @@
-// export default defineNuxtPlugin(async nuxtApp => {
+export default defineNuxtPlugin(async nuxtApp => {
 // //   let { userData } = userAuth()
 
 //   let headers = useRequestHeaders(['cookie'])
@@ -14,4 +14,4 @@
 //     console.log(error);
     
 //   }
-// })
+})
