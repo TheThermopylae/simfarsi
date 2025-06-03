@@ -4,17 +4,13 @@
   >
     <h2 class="text-xs font-peydaB">جدیدترین آگهی ها</h2>
   </div>
-  <section class="mb-20">
-    <MainAdCard v-for="item in data.products" :key="item._id" :data="item"></MainAdCard>
+  <section class="mb-5">
+    <MainAdCard v-for="item in 10"></MainAdCard>
   </section>
 </template>
 
 <script setup>
 let config = useRuntimeConfig()
-
-let { data } = await useFetch('/api/admin/products/getProducts', {
-  credentials: 'include'
-})
 
 // console.log(data.value)
 </script>
