@@ -3,7 +3,6 @@
     <MainHeroSlider></MainHeroSlider>
   </div>
   <MainTheCategories></MainTheCategories>
-  <!-- <MainBestShops></MainBestShops> -->
   <MainAmazingSection></MainAmazingSection>
   <MainAdSection></MainAdSection>
 </template>
