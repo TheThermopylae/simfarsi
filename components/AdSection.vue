@@ -5,7 +5,13 @@
     <h2 class="text-xs font-peydaB"><slot></slot></h2>
   </div>
   <section class="mb-20">
-    <AdCard v-for="item in data.products" :key="item._id" :data="item"></AdCard>
+    <AdCard
+      v-for="item in data.products"
+      :key="item._id"
+      :data="item"
+      v-if="data"
+    ></AdCard>
+    <p v-else class="text-center text-xs">محصولی وجود ندارد</p>
   </section>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container mt-5">
     <div class="flex justify-between">
       <NuxtLink to="/" class="text-2sm text-center font-peydaB">
         <div

@@ -1,5 +1,8 @@
 <template>
-  <header class="pb-5 pt-3 fixed w-full z-10 bg-white top-0">
+  <header
+    class="pb-5 pt-3 fixed w-full z-10 bg-white top-0 transition-all duration-300"
+    :class="{ shadow: scrolled > 50 }"
+  >
     <div class="container">
       <HeaderTopSection />
       <div class="flex justify-between items-center mt-3">
@@ -37,7 +40,7 @@
           <div class="relative flex-grow">
             <input
               v-if="route.path != '/search'"
-              @keydown.{keyAlias}.enter="searchProdut"
+              @keydown.{keyAlias}.enter="searchProduct"
               v-model="searchValue"
               type="text"
               id="search"
@@ -163,9 +166,25 @@ const visibleBottom = ref(false)
 const value = ref([0, 200])
 let numberValue = ref(null)
 
-function searchProdut () {
-  if (searchValue.value) return navigateTo('/search')
+async function searchProduct () {
+  if (searchValue.value)
+    await navigateTo({
+      path: '/search',
+      query: {
+        search: searchValue.value
+      }
+    })
+
+  searchValue.value = ''
 }
+
+let scrolled = ref(null)
+
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    scrolled.value = document.documentElement.scrollTop
+  })
+})
 </script>
 <style scoped>
 :deep(.p-inputotp-input) {

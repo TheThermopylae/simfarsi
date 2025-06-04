@@ -1,7 +1,7 @@
 <template>
   <article>
     <div
-      class="bg-white h-[180px] rounded-xl justify-center relative shadow-md p-3"
+      class="bg-white h-[180px] rounded-xl justify-center relative shadow-md p-2"
     >
       <span
         class="font-peydaB absolute top-2 right-2 bg-gradient-to-l from-[#FF5790] to-[#F81140] text-white rounded-md rounded-br-none text-xs px-2 py-1"
@@ -51,7 +51,7 @@
           <span>کم کارکرد</span>
         </div>
       </div>
-      <div class="absolute bottom-3 w-full right-0 flex justify-between items-center px-3">
+      <div class="absolute bottom-2 w-full right-0 flex justify-between items-center px-3">
         <NuxtLink class="primary py-1 px-3 rounded-lg" to="/">شرایط اقساط</NuxtLink>
         <div class="font-peydaB">
           <span class="text-[#F1AEAE]">۱۶۷,۹۰۰,۰۰۰</span>

@@ -21,7 +21,8 @@
         >
       </div>
     </div>
-    <!-- <MainAmazingSlider></MainAmazingSlider> -->
-    <SimpleCardSlider />
+    <div class="bg-[#EBEBEB] h-[180px] mb-20 px-3">
+      <SimpleCardSlider />
+    </div>
   </section>
 </template>

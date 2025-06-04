@@ -2,7 +2,7 @@
   <section class="my-10 mb-10">
     <div class="flex justify-between items-center container mb-5">
       <h2 class="text-xs">
-        <span class="ml-2 text-xl font-peydaB"> شگفت انگیز</span>
+        <span class="ml-2 text-xl font-peydaB">شگفت انگیز</span>
       </h2>
       <div class="flex">
         <span
@@ -22,6 +22,6 @@
       </div>
     </div>
     <!-- <MainAmazingSlider></MainAmazingSlider> -->
-    <CategorySimpleCardSlider />
+    <CategorySimcardAdsSlider />
   </section>
 </template>

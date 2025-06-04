@@ -7,7 +7,7 @@
       class="mySwiper !px-3 !pb-5"
     >
       <swiper-slide v-for="item in 10">
-        <CategorySimpleCard></CategorySimpleCard>
+        <CategorySimCardAd></CategorySimCardAd>
       </swiper-slide>
     </swiper>
   </div>

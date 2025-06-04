@@ -52,6 +52,10 @@
     }
 }
 
+h2 {
+    @apply font-peydaB
+}
+
 .cinput {
     @apply block bg-white w-full rounded p-2 border border-black
 }
@@ -70,6 +74,10 @@
 
 .btn-c {
     @apply bg-black text-white rounded
+}
+
+.center {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
 }
 
 /* PrimeVue Theming */

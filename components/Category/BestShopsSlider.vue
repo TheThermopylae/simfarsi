@@ -12,6 +12,7 @@
     <swiper-slide>
       <CategoryShopCard
         ><svg
+          class="center"
           width="50"
           height="50"
           viewBox="0 0 50 50"
@@ -46,6 +47,7 @@
     <swiper-slide>
       <CategoryShopCard
         ><svg
+          class="center"
           width="50"
           height="50"
           viewBox="0 0 50 50"
@@ -80,6 +82,7 @@
     <swiper-slide>
       <CategoryShopCard
         ><svg
+          class="center"
           width="50"
           height="50"
           viewBox="0 0 50 50"
@@ -114,6 +117,7 @@
     <swiper-slide>
       <CategoryShopCard
         ><svg
+          class="center"
           width="50"
           height="50"
           viewBox="0 0 50 50"
@@ -148,6 +152,7 @@
     <swiper-slide>
       <CategoryShopCard
         ><svg
+          class="center"
           width="50"
           height="50"
           viewBox="0 0 50 50"

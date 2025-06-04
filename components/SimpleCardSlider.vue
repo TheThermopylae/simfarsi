@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-[#EBEBEB] py-3 h-[180px] mb-32">
+  <div class="py-3">
     <swiper
       :slidesPerView="2"
       :spaceBetween="14"
       :modules="modules"
-      class="mySwiper !px-3"
+      class="mySwiper"
     >
       <swiper-slide v-for="item in 10">
         <SimpleCard></SimpleCard>
