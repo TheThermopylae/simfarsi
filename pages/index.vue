@@ -3,8 +3,8 @@
     <MainHeroSlider></MainHeroSlider>
   </div>
   <MainTheCategories></MainTheCategories>
-  <MainAmazingSection></MainAmazingSection>
-  <MainAdSection></MainAdSection>
+  <AmazingSection></AmazingSection>
+  <AdSection></AdSection>
 </template>
 
 <script setup>

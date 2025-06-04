@@ -1,32 +1,37 @@
 <template>
-  <article class="border-b border-gray-300 pb-3 mb-3 last:pb-0 last:mb-0 last:border-0">
-    <div class="flex justify-between items-center container">
-      <div>
-        <h4 class="flex items-center text-xl gap-1">
-          09121077650
+  <article>
+    <div
+      class="bg-white h-[180px] rounded-xl justify-center relative shadow-md p-3"
+    >
+      <span
+        class="font-peydaB absolute top-2 right-2 bg-gradient-to-l from-[#FF5790] to-[#F81140] text-white rounded-md rounded-br-none text-xs px-2 py-1"
+        >20%-</span
+      >
+      <div class="flex items-center justify-center h-full flex-col">
+        <div class="flex items-center">
           <svg
-            width="17"
-            height="16"
-            viewBox="0 0 17 16"
+            width="54"
+            height="50"
+            viewBox="0 0 54 50"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
           >
-            <rect width="17" height="16" fill="url(#pattern0_294_233)" />
+            <rect width="53.125" height="50" fill="url(#pattern0_413_3004)" />
             <defs>
               <pattern
-                id="pattern0_294_233"
+                id="pattern0_413_3004"
                 patternContentUnits="objectBoundingBox"
                 width="1"
                 height="1"
               >
                 <use
-                  xlink:href="#image0_294_233"
+                  xlink:href="#image0_413_3004"
                   transform="matrix(0.00390625 0 0 0.00415039 0 -0.03125)"
                 />
               </pattern>
               <image
-                id="image0_294_233"
+                id="image0_413_3004"
                 width="256"
                 height="256"
                 preserveAspectRatio="none"
@@ -34,34 +39,31 @@
               />
             </defs>
           </svg>
-        </h4>
-        <div class="flex items-center text-[7px] text-[#919191] gap-1">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12.265 6.44583V11.0833C12.265 11.4042 12.1508 11.6788 11.9223 11.9073C11.6938 12.1358 11.4192 12.25 11.0983 12.25H2.93168C2.61084 12.25 2.33619 12.1358 2.10772 11.9073C1.87925 11.6788 1.76501 11.4042 1.76501 11.0833V6.44583C1.5414 6.24167 1.36883 5.97917 1.2473 5.65833C1.12578 5.3375 1.12334 4.9875 1.24001 4.60833L1.85251 2.625C1.93029 2.37222 2.06883 2.16319 2.26814 1.99792C2.46744 1.83264 2.69834 1.75 2.96084 1.75H11.0692C11.3317 1.75 11.5602 1.83021 11.7546 1.99062C11.949 2.15104 12.09 2.3625 12.1775 2.625L12.79 4.60833C12.9067 4.9875 12.9042 5.33264 12.7827 5.64375C12.6612 5.95486 12.4886 6.22222 12.265 6.44583ZM8.29834 5.83333C8.56084 5.83333 8.76015 5.7434 8.89626 5.56354C9.03237 5.38368 9.08584 5.18194 9.05668 4.95833L8.73584 2.91667H7.59834V5.075C7.59834 5.27917 7.6664 5.4566 7.80251 5.60729C7.93862 5.75799 8.1039 5.83333 8.29834 5.83333ZM5.67334 5.83333C5.89696 5.83333 6.07925 5.75799 6.22022 5.60729C6.36119 5.4566 6.43168 5.27917 6.43168 5.075V2.91667H5.29418L4.97334 4.95833C4.93446 5.19167 4.9855 5.39583 5.12647 5.57083C5.26744 5.74583 5.44973 5.83333 5.67334 5.83333ZM3.07751 5.83333C3.25251 5.83333 3.40564 5.77014 3.53689 5.64375C3.66814 5.51736 3.74834 5.35694 3.77751 5.1625L4.09834 2.91667H2.96084L2.37751 4.87083C2.31918 5.06528 2.35078 5.27431 2.4723 5.49792C2.59383 5.72153 2.79557 5.83333 3.07751 5.83333ZM10.9525 5.83333C11.2345 5.83333 11.4386 5.72153 11.565 5.49792C11.6914 5.27431 11.7206 5.06528 11.6525 4.87083L11.04 2.91667H9.93168L10.2525 5.1625C10.2817 5.35694 10.3619 5.51736 10.4931 5.64375C10.6244 5.77014 10.7775 5.83333 10.9525 5.83333ZM2.93168 11.0833H11.0983V6.97083C11.0497 6.99028 11.0181 7 11.0036 7H10.9525C10.69 7 10.4591 6.95625 10.2598 6.86875C10.0605 6.78125 9.86362 6.64028 9.66918 6.44583C9.49418 6.62083 9.29487 6.75694 9.07126 6.85417C8.84765 6.95139 8.60946 7 8.35668 7C8.09418 7 7.84869 6.95139 7.62022 6.85417C7.39175 6.75694 7.19001 6.62083 7.01501 6.44583C6.84973 6.62083 6.65772 6.75694 6.43897 6.85417C6.22022 6.95139 5.98446 7 5.73168 7C5.44973 7 5.19453 6.95139 4.96605 6.85417C4.73758 6.75694 4.53584 6.62083 4.36084 6.44583C4.15668 6.65 3.95494 6.7934 3.75564 6.87604C3.55633 6.95868 3.33029 7 3.07751 7H3.01189C2.98758 7 2.96084 6.99028 2.93168 6.97083V11.0833Z"
-              fill="#919191"
-            />
-          </svg>
-          <h4>فروشگاه : ZarreTell</h4>
+          <p style="direction: ltr" class="font-peydaB text-xl">
+            0912 192 84 29
+          </p>
         </div>
-        <p class="text-[7px] text-[#919191]">قیمت : 20,500,000 تومان</p>
-        <div class="flex mt-2 text-2sm gap-0.5">
-            <span class="border-l border-[#919191] pl-0.5">کارکرده</span>
-            <span class="border-l border-[#919191] pl-0.5">نقد و اقساط</span>
-            <span>سرمایه گذاری</span>
+        <div class="self-start mt-3">
+          <span>همراه اول</span>
+          /
+          <span>داعمی</span>
+          /
+          <span>کم کارکرد</span>
         </div>
       </div>
-      <div class="w-[91px] h-[92px] bg-[#D9D9D9] rounded-xl"></div>
+      <div class="absolute bottom-3 w-full right-0 flex justify-between items-center px-3">
+        <NuxtLink class="primary py-1 px-3 rounded-lg" to="/">شرایط اقساط</NuxtLink>
+        <div class="font-peydaB">
+          <span class="text-[#F1AEAE]">۱۶۷,۹۰۰,۰۰۰</span>
+          تومان
+        </div>
+      </div>
     </div>
   </article>
 </template>
 
-<script setup>
-let props = defineProps(['data'])
-</script>
+<style scoped>
+.relative {
+  box-shadow: 0 5px 10px 0 #00000014;
+}
+</style>

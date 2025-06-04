@@ -63,7 +63,8 @@
         ثبت آگهی
       </NuxtLink>
       <NuxtLink
-        to="/"
+        to="/category/simcard"
+        active-class="text-black"
         class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
       >
         <svg
@@ -99,3 +100,9 @@
     </div>
   </section>
 </template>
+
+<style scoped>
+*{
+  transition: all .3s;
+}
+</style>

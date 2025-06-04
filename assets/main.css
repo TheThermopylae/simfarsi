@@ -56,12 +56,16 @@
     @apply block bg-white w-full rounded p-2 border border-black
 }
 
-.primary{
+.primary {
     @apply bg-black text-white
 }
 
 .shadow-c {
     box-shadow: 0 4px 4px 0 #00000008;
+}
+
+.shadow-c-md {
+    box-shadow: 0 5px 10px 0 #0000001a;
 }
 
 .btn-c {
@@ -79,4 +83,13 @@
 
 .p-toast-message {
     box-shadow: none !important;
+}
+
+.p-select {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.p-select-label {
+    color: #000 !important;
 }
