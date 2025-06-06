@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="overflow-x-auto bg-white mt-5 rounded-lg shadow p-5"
-  >
+  <div class="overflow-x-auto bg-white mt-5 rounded-lg shadow p-5">
     <table class="table">
       <thead>
         <tr>
@@ -13,30 +11,33 @@
       </thead>
       <tbody>
         <AdminDashboardUserCard
-        v-if="users"
-          @editUser="refresh"
+          v-if="users"
+          @editUser="refreshDataFunc"
+          @error="showErrorFunc"
           v-for="item in users.users"
           :user="item"
         ></AdminDashboardUserCard>
       </tbody>
     </table>
+    <Toast />
   </div>
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
-
-let {
-  data: users,
-  error,
-  refresh
-} = await useAsyncData(() =>
-  $fetch('/api/admin/userlist',{
-    credentials : 'include'
+let { data: users, refresh } = await useAsyncData(() =>
+  $fetch('/api/admin/userlist', {
+    credentials: 'include'
   })
 )
 
-let toast = useToast()
+let { showToast } = useToastComp()
 
-if (error.value) toast.error(error.value.data.message)
+function refreshDataFunc () {
+  refresh()
+  showToast('نقش کاربر مورد نظر تغییر یافت')
+}
+
+function showErrorFunc (error) {
+  showToast('error', 'خطا', error.data)
+}
 </script>

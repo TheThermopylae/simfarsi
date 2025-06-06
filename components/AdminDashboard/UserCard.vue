@@ -40,14 +40,11 @@
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
 let props = defineProps(['user'])
 
-let emit = defineEmits(['editUser'])
+let emit = defineEmits(['editUser', 'error'])
 
 let loading = ref(false)
-
-let toast = useToast()
 
 async function changeRole () {
   loading.value = true
@@ -60,10 +57,9 @@ async function changeRole () {
       body: { id: props.user._id }
     })
 
-    toast.success(data)
     emit('editUser')
   } catch (error) {
-    toast.error(error.data.message)
+    emit('error', error)
   } finally {
     loading.value = false
   }
