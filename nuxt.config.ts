@@ -45,10 +45,7 @@ export default defineNuxtConfig({
     ],
   },
   css: ['~/assets/main.css'],
-  modules: ['@primevue/nuxt-module', '@nuxt/image', 'nuxt-tiptap-editor'],
-  tiptap: {
-    prefix: 'Tiptap', //prefix for Tiptap imports, composables not included
-  }, 
+  modules: ['@primevue/nuxt-module', '@nuxt/image'],
   primevue: {
     options: {
       theme: {

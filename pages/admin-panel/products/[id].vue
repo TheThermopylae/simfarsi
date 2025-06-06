@@ -135,8 +135,6 @@
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
-
 useHead({
   title: 'افزودن محصول'
 })
@@ -200,7 +198,6 @@ async function addProductFunc () {
       let formData = new FormData()
 
       formData.append('title', productData.title)
-      formData.append('color', productData.color)
       formData.append('price', productData.price)
       formData.append('category', productData.category)
       formData.append('img', productData.img)
@@ -211,11 +208,9 @@ async function addProductFunc () {
       formData.append('sale', productData.sale)
       formData.append('Operator', productData.Operator)
       formData.append('Numbertype', productData.Numbertype)
-      formData.append('isaccept', productData.isaccept)
       formData.append('userid', productData.userid)
-      formData.append('isexisting', productData.isexisting)
 
-      let data = await $fetch('/api/admin/products/addProduct', {
+      let data = await $fetch('/api/admin/products/updateProduct', {
         method: 'POST',
         headers: {
           credentials: 'include'
