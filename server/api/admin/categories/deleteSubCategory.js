@@ -5,11 +5,12 @@ export default defineEventHandler(async event => {
 
   try {
     let data = await $fetch(
-      `${config.public.API_BASE_URL}/admin/categories/${body.categoryid}/subcategory/${body.subcategoryId}/delete`,
+      `${config.public.API_BASE_URL}/admin/category/${body.categoryId}/subcategory/delete/${body.subcategoryId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
+        method: 'DELETE'
       }
     )
 

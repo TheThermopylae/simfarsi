@@ -4,14 +4,14 @@
   >
     <h2 class="text-xs font-peydaB"><slot></slot></h2>
   </div>
-  <section class="mb-20">
+  <section>
     <AdCard
       v-for="item in data.products"
       :key="item._id"
       :data="item"
-      v-if="data"
+
     ></AdCard>
-    <p v-else class="text-center text-xs">محصولی وجود ندارد</p>
+    <!-- <p v-else class="text-center text-sm">محصولی وجود ندارد</p> -->
   </section>
 </template>
 
@@ -19,4 +19,7 @@
 let { data } = await useFetch('/api/admin/products/getProducts', {
   credentials: 'include'
 })
+
+// console.log(data.value);
+
 </script>

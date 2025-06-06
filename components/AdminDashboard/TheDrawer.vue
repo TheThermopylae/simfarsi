@@ -235,7 +235,7 @@ ul li svg {
   margin-left: 5px;
 }
 .router-link-active {
-  background: #8c00b6;
+  background: #000;
   color: #fff;
 }
 </style>

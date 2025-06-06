@@ -4,7 +4,7 @@
     <p class="text-gray-600 my-4">
       وبلاگ خود را ویرایش کنید و آن را اضافه کنید
     </p>
-    <form @submit.prevent="">
+    <form @submit.prevent="addBlog">
       <div class="grid grid-cols-2 gap-5">
         <div>
           <label for="blog-title">عنوان بلاگ</label>
@@ -32,12 +32,15 @@
         rows="5"
         v-model="blogData.dec"
       ></textarea>
-      <div class="mt-4">
+      <div class="my-5">
         <h2>محتوای بلاگ</h2>
-        <AdminDashboardAddProductDes
-          @editorContent="setEditorContent"
-          :content="blogData.text"
-        ></AdminDashboardAddProductDes>
+        <Editor
+          class="mt-2"
+          v-model="blogData.text"
+          editorStyle="height: 320px;border: 1px solid black;direction : ltr;"
+          pt:image="!hidden"
+          pt:toolbar="!border-black !border-b-0"
+        />
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         <div>
@@ -94,11 +97,7 @@
         class="mt-4 rounded-lg w-96 h-52"
         v-if="showImage.length != 0"
       />
-      <button
-        class="btn-c mt-5 w-36 flex justify-center"
-        v-if="!loading"
-        @click="addBlog"
-      >
+      <button class="btn-c mt-5 w-36 flex justify-center py-3" v-if="!loading">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -112,22 +111,22 @@
         ویرایش بلاگ
       </button>
       <button
-        class="btn-c mt-5 w-36 flex justify-center"
+        class="btn-c mt-5 w-36 flex justify-center py-3"
         v-else
         :disabled="loading"
       >
         <LoadingSpinner></LoadingSpinner>
       </button>
     </form>
+    <Toast />
   </div>
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
-
+let { showToast } = useToastComp()
 let route = useRoute()
 
-let { data: blog } = await useAsyncData(() =>
+let { data: blog, refresh } = await useAsyncData(() =>
   $fetch(`/api/admin/blog/getBlogForm`, {
     method: 'POST',
     headers: {
@@ -151,12 +150,7 @@ let blogData = reactive({
 
 let showImage = ref([])
 
-let toast = useToast()
 let loading = ref(false)
-
-function setEditorContent (des) {
-  blogData.text = des.getHTML()
-}
 
 function handleImageUpload (event) {
   const files = event.target.files
@@ -181,7 +175,11 @@ async function addBlog () {
     !blogData.alt ||
     !blogData.img
   )
-    toast.error('لطفا تمامی فیلد هارا پر کنید و یک عکس انتخاب کنید')
+    showToast(
+      'error',
+      'خطا',
+      'لطفا تمامی فیلد هارا پر کنید و یک عکس انتخاب کنید'
+    )
   else {
     try {
       loading.value = true
@@ -207,10 +205,10 @@ async function addBlog () {
         body: formData
       })
 
-      toast.success(data.message)
-      return navigateTo('/admin-panel/blog')
+      await refresh()
+      showToast('بلاگ با ویرایش اضافه شد')
     } catch (error) {
-      toast.error('خطا در انجام عملیات. لطفا دوباره تلاش کنید')
+      showToast('error', 'خطا', error.data)
     } finally {
       loading.value = false
     }

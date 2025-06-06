@@ -2,7 +2,7 @@
   <div>
     <div class="flex justify-between items-center">
       <h1 class="text-3xl">بلاگ</h1>
-      <NuxtLink class="btn-c" to="/admin-panel/blog/add-blog-page">
+      <NuxtLink class="btn-c py-3 px-5" to="/admin-panel/blog/add-blog-page">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -25,34 +25,26 @@
         v-for="item in blogs.blogs"
         :key="item._id"
         :data="item"
-        @showDeleteModal="showModalFunc(item)"
+        @success="showSuccessToast"
       ></AdminDashboardBlogCard>
     </div>
-    <Transition>
-      <AdminDashboardDeleteBlogModal
-        v-if="showModal"
-        :blog="targetBlog"
-        @closeModal="showModal = false"
-        @acceptDelete="refresh"
-      ></AdminDashboardDeleteBlogModal>
-    </Transition>
+    <Toast />
   </div>
 </template>
 
 <script setup>
+useHead({
+  title: 'بلاگ'
+})
+
 let { data: blogs, refresh } = await useAsyncData(() =>
   $fetch('/api/admin/blog/getBlogs')
 )
 
-let showModal = ref(false)
-let targetBlog = ref(null)
+let { showToast } = useToastComp()
 
-function showModalFunc (blog) {
-  showModal.value = true
-  targetBlog.value = blog._id
+function showSuccessToast () {
+  refresh()
+  showToast('بلاگ با موفقیت حذف شد')
 }
-
-useHead({
-  title: 'بلاگ'
-})
 </script>

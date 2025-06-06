@@ -3,9 +3,7 @@
     class="hidden lg:block w-1/4 xl:w-1/5 fixed h-full top-0 right-0 bg-white dark:bg-dark-s dark:text-text-dark"
   >
     <div class="flex justify-between items-end text-2xl px-4 mt-2">
-      <NuxtLink to="/" class="relative top-1">
-        Simcart.Shop
-      </NuxtLink>
+      <NuxtLink to="/" class="relative top-1"> Simcart.Shop </NuxtLink>
       <h4>پنل مدیریت</h4>
     </div>
     <ul class="min-h-full w-full p-4 pt-1">
@@ -87,13 +85,35 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
           >
-            <path fill="currentColor" d="M5 7h13v10H2V4h7l2 2H4v9h1z" />
+            <path
+              fill="currentColor"
+              d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h5.175q.4 0 .763.15t.637.425L12 6h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20z"
+            />
           </svg>
           دسته بندی ها
+        </NuxtLink>
+      </li>
+      <li class="mb-2 border-r pr-4 border-gray-300">
+        <NuxtLink
+          to="/admin-panel/subcategories/"
+          class="block p-2 rounded-lg transition-all hover:bg-black hover:text-white"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M3 21q-.825 0-1.412-.587T1 19V6h2v13h17v2zm4-4q-.825 0-1.412-.587T5 15V4q0-.825.588-1.412T7 2h5l2 2h7q.825 0 1.413.588T23 6v9q0 .825-.587 1.413T21 17z"
+            />
+          </svg>
+          زیر دسته بندی ها
         </NuxtLink>
       </li>
       <li class="mb-2">

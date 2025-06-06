@@ -33,7 +33,7 @@
             viewBox="0 0 24 24"
             fill="currentColor"
             class="size-6 cursor-pointer hover:text-red-500 transition-all"
-            @click="$emit('showDeleteModal')"
+            @click="visible = true"
           >
             <path
               fill-rule="evenodd"
@@ -44,9 +44,62 @@
         </div>
       </div>
     </div>
+    <Dialog
+      v-model:visible="visible"
+      modal
+      header="حدف بلاگ "
+      class="w-11/12 md:w-2/3 lg:w-2/5 xl:w-1/4"
+    >
+      <span class="text-surface-500 dark:text-surface-400 block mb-8"
+        >آیا میخواهید این بلاگ  <b>{{ props.data.title }}</b> را حذف کنید؟</span
+      >
+      <div class="grid grid-cols-2 gap-2">
+        <Button
+          unstyled
+          type="button"
+          label="خیر"
+          class="border border-red-500 px-5 py-1.5 rounded text-red-500"
+          severity="secondary"
+          @click="visible = false"
+        ></Button>
+        <Button
+          :disabled="loading"
+          unstyled
+          label="بله"
+          type="button"
+          class="btn-c px-5 py-1.5"
+          severity="secondary"
+          :loading="loading"
+          @click="removeBlog"
+        ></Button>
+      </div>
+    </Dialog>
   </div>
 </template>
 
 <script setup>
 let props = defineProps(['data'])
+let emit = defineEmits(['success','error'])
+
+let visible = ref(false)
+
+let loading = ref(false)
+
+async function removeBlog () {
+  loading.value = true
+
+  try {
+    let data = await $fetch('/api/admin/blog/deleteBlog', {
+      credentials: 'include',
+      body: { id: props.data._id },
+      method: 'POST'
+    })
+
+    emit('success')
+  } catch (err) {
+    emit('error', err)
+  } finally {
+    loading.value = false
+  }
+}
 </script>

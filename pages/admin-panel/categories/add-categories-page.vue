@@ -2,14 +2,14 @@
   <div>
     <h1 class="text-2xl xl:text-3xl mb-5">افزودن دسته بندی</h1>
     <form @submit.prevent="addCategoryFunc" enctype="multipart/form-data">
-      <div class="my-2 grid grid-cols-2 gap-5">
+      <div class="mt-2 mb-5 grid md:grid-cols-2 gap-5">
         <div>
-          <label for="category-name">نام دسته بندی</label>
+          <label for="category-name">عنوان دسته بندی</label>
           <input
             type="text"
             class="cinput set-ring mt-3"
             id="category-name"
-            v-model="categoryData.name"
+            v-model="categoryData.title"
           />
         </div>
         <div>
@@ -22,34 +22,8 @@
           />
         </div>
       </div>
-      <div>
-        <label for="category-des">توضیح دسته بندی</label>
-        <textarea
-          id="category-des"
-          class="w-full mt-3 set-ring rounded-lg outline-none p-2 border bg-white dark:bg-dark-s dark:border-b-dark"
-          rows="5"
-          v-model="categoryData.description"
-        ></textarea>
-      </div>
-      <div class="mt-2">
-        <label for="category-images">تصویر دسته بندی</label>
-        <input
-          id="category-images"
-          name="images"
-          accept="image/*"
-          type="file"
-          class="file-input file-input-ghost w-full max-w-xs my-4 block border border-purple-c"
-          @change="handleImageUpload"
-        />
-      </div>
-      <img
-        v-if="showImage"
-        :src="showImage"
-        class="rounded-full my-4 w-40 h-40"
-        alt="تصویر دسته بندی"
-      />
       <button
-        class="btn-c h-12 w-42 flex gap-2 items-center"
+        class="btn-c px-3 h-14 w-44 flex gap-2 items-center"
         @click=""
         v-if="!loading"
       >
@@ -69,74 +43,54 @@
         </svg>
         افزودن دسته بندی
       </button>
-      <button class="btn-c h-12 w-42 flex gap-2 items-center" v-else="!loading" :disabled="loading">
+      <button
+        class="btn-c h-14 w-44 flex gap-2 items-center"
+        v-else="!loading"
+        :disabled="loading"
+      >
         <LoadingSpinner></LoadingSpinner>
       </button>
     </form>
+    <Toast />
   </div>
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
-
 useHead({
-  title:'افزودن دسته بندی'
+  title: 'افزودن دسته بندی'
 })
 
 let categoryData = ref({
-  name: '',
-  description: '',
-  href: '',
-  image: ''
+  title: '',
+  href: ''
 })
-
-let showImage = ref('')
-
 let loading = ref(false)
 
-let toast = useToast()
-
-function handleImageUpload (event) {
-  const files = event.target.files
-
-  const file = files[0]
-  if (file) {
-    const imageUrl = URL.createObjectURL(file)
-    showImage.value = imageUrl
-    categoryData.value.image = file
-  }
-}
+let { showToast } = useToastComp()
 
 async function addCategoryFunc () {
-  if (
-    !categoryData.value.name ||
-    !categoryData.value.href ||
-    !categoryData.value.description ||
-    !categoryData.value.image
-  )
-    toast.error('تمامی فیلد هارا پر کنید')
+  if (!categoryData.value.title || !categoryData.value.href)
+    showToast(
+      'error',
+      'خطا',
+      'برای افزودن دسته بندی باید یک عنوان و یک مسیر مشخص کنید'
+    )
   else {
     try {
       loading.value = true
-      let formData = new FormData()
-
-      formData.append('name', categoryData.value.name)
-      formData.append('href', categoryData.value.href)
-      formData.append('description', categoryData.value.description)
-      formData.append('image', categoryData.value.image)
 
       let data = await $fetch('/api/admin/categories/addCategory', {
         method: 'POST',
         headers: {
           credentials: 'include'
         },
-        body: formData
+        body: { title: categoryData.value.title, href: categoryData.value.href }
       })
 
-      toast.success('دسته بندی با موفقیت اضافه شد')
-      return navigateTo('/admin-panel/categories')
+      showToast('success', 'موفقیت آمیز', 'دسته بندی شما با موفقیت اضافه شد')
+      // return navigateTo('/admin-panel/categories')
     } catch (error) {
-      toast.error('مشکلی پیش آمده لطفا دوباره تلاش کنید')
+      showToast('error', ' خطا', error)
     } finally {
       loading.value = false
     }

@@ -5,17 +5,17 @@ import Aura from '@primeuix/themes/aura';
 const MyPreset = definePreset(Aura, {
   semantic: {
     primary: {
-      50: '#001A46',
-      100: '#001A46',
-      200: '#001A46',
-      300: '#001A46',
-      400: '#001A46',
-      500: '#001A46',
-      600: '#001A46',
-      700: '#001A46',
-      800: '#001A46',
-      900: '#001A46',
-      950: '#001A46'
+      50: '#000',
+      100: '#000',
+      200: '#000',
+      300: '#000',
+      400: '#000',
+      500: '#000',
+      600: '#000',
+      700: '#000',
+      800: '#000',
+      900: '#000',
+      950: '#000'
     },
     mySelect: {
       optionSelectedBackground: "black"
@@ -45,7 +45,10 @@ export default defineNuxtConfig({
     ],
   },
   css: ['~/assets/main.css'],
-  modules: ['@primevue/nuxt-module', '@nuxt/image'],
+  modules: ['@primevue/nuxt-module', '@nuxt/image', 'nuxt-tiptap-editor'],
+  tiptap: {
+    prefix: 'Tiptap', //prefix for Tiptap imports, composables not included
+  }, 
   primevue: {
     options: {
       theme: {

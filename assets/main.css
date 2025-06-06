@@ -57,7 +57,7 @@ h2 {
 }
 
 .cinput {
-    @apply block bg-white w-full rounded p-2 border border-black
+    @apply block bg-white w-full rounded p-[6.8px] border border-black
 }
 
 .primary {
@@ -73,20 +73,20 @@ h2 {
 }
 
 .btn-c {
-    @apply bg-black text-white rounded
+    @apply bg-black text-white rounded hover:opacity-90 transition-all cursor-pointer flex justify-center items-center gap-2
 }
 
 .center {
     @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
 }
 
+.req {
+    @apply after:content-['*'] after:text-red-500 after:font-bold
+}
+
 /* PrimeVue Theming */
 .p-toast {
     @apply !w-11/12 !max-w-[350px]
-}
-
-.p-toast-close-button, .p-toast-close-icon {
-    display: none !important;
 }
 
 .p-toast-message {

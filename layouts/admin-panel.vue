@@ -3,7 +3,7 @@
     <ClientOnly>
       <AdminDashboardSideBar></AdminDashboardSideBar>
       <AdminDashboardTheDrawer class="lg:hidden"></AdminDashboardTheDrawer>
-      <div class="flex-grow container m-auto py-5 lg:pt-5">
+      <div class="flex-grow container m-auto lg:pt-5">
         <slot />
       </div>
     </ClientOnly>

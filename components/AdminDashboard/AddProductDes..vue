@@ -103,10 +103,10 @@
 </template>
 
 <script setup>
-let props = defineProps(['content'])
+// let props = defineProps(['content'])
 
 const editor = useEditor({
-  content: props.content ? props.content : '',
+  content: '',
   extensions: [TiptapStarterKit],
 
   editorProps: {
