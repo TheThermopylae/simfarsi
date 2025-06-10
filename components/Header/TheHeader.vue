@@ -181,8 +181,13 @@ async function searchProduct () {
 let scrolled = ref(null)
 
 onMounted(() => {
-  window.addEventListener('scroll', () => {
+  const handleScroll = () => {
     scrolled.value = document.documentElement.scrollTop
+  }
+  window.addEventListener('scroll', handleScroll)
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
   })
 })
 </script>
