@@ -20,7 +20,7 @@
         افزودن بلاگ
       </NuxtLink>
     </div>
-    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4" v-if="blogs">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4" v-if="blogs && blogs.blogs.length > 0">
       <AdminDashboardBlogCard
         v-for="item in blogs.blogs"
         :key="item._id"
@@ -28,6 +28,7 @@
         @success="showSuccessToast"
       ></AdminDashboardBlogCard>
     </div>
+    <p v-else class="text-center text-gray-400">بلاگی وجود ندارد</p>
     <Toast />
   </div>
 </template>

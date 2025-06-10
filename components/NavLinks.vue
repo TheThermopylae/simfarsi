@@ -1,6 +1,8 @@
 <template>
   <section class="container fixed left-1/2 -translate-x-1/2 bottom-3 z-10">
-    <div class="bg-[#F4F4F4] p-3 rounded-full shadow flex justify-between">
+    <div
+      class="bg-[#F4F4F4] py-3 rounded-full shadow grid grid-cols-5 ustify-between"
+    >
       <NuxtLink
         active-class="text-black"
         to="/auth"
@@ -39,10 +41,10 @@
             d="M5.845 4C5.364 4 5 4.374 5 4.804V6H4V4.804C4 3.794 4.84 3 5.845 3h10.31C17.16 3 18 3.794 18 4.804v7.392c0 1.01-.84 1.804-1.845 1.804H10v-1h6.155c.481 0 .845-.374.845-.804V4.804c0-.43-.364-.804-.845-.804zM10 12h2.5a.5.5 0 0 0 0-1H10zm-5 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zM2 8.5A1.5 1.5 0 0 1 3.5 7h4A1.5 1.5 0 0 1 9 8.5v8A1.5 1.5 0 0 1 7.5 18h-4A1.5 1.5 0 0 1 2 16.5zM3.5 8a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5z"
           />
         </svg>
-       کالای دیجیتال
+        کالای دیجیتال
       </NuxtLink>
       <NuxtLink
-        to="/"
+        to="/user-panel/ad"
         class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
       >
         <svg
@@ -102,7 +104,7 @@
 </template>
 
 <style scoped>
-*{
-  transition: all .3s;
+* {
+  transition: all 0.3s;
 }
 </style>

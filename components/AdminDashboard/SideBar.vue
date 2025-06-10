@@ -119,6 +119,9 @@
       <li class="mb-2">
         <NuxtLink
           to="/admin-panel/products/"
+          :class="{
+            'bg-black text-white': route.path.startsWith('/admin-panel/products')
+          }"
           class="block p-2 rounded-lg transition-all hover:bg-black hover:text-white"
         >
           <svg
@@ -141,6 +144,9 @@
       </li>
       <li class="pb-2 border-gray-300">
         <NuxtLink
+          :class="{
+            'bg-black text-white': route.path.startsWith('/admin-panel/blog')
+          }"
           to="/admin-panel/blog"
           class="block p-2 rounded-lg transition-all hover:bg-black hover:text-white"
         >
@@ -187,6 +193,8 @@
 </template>
 
 <script setup>
+let route = useRoute()
+
 // let { userData } = userAuth()
 </script>
 

@@ -26,12 +26,13 @@
     <p v-if="pending" class="text-gray-600 text-center">درحال بارگزاری</p>
     <div class="mt-5" v-else-if="categories.categorys.length > 0">
       <div
-        class="border-b mb-3 border-gray-300"
         v-for="category in categories.categorys"
+        class="border-b mb-3 border-gray-300"
+        :class="{ 'pb-3': category.subcategories.length == 0 }"
         :key="category._id"
       >
         {{ category.title }}
-        <div class="grid grid-cols-2 gap-5">
+        <div class="grid grid-cols-2 gap-5" v-if="category.subcategories.length > 0">
           <AdminDashboardSubCategoryCardDash
             v-for="item in category.subcategories"
             :subcategory="item"
@@ -42,6 +43,7 @@
             @errorEdit="showErrorFunc"
           ></AdminDashboardSubCategoryCardDash>
         </div>
+        <p v-else class="text-center text-gray-400">این دسته بندی زیر دسته ندارد</p>
       </div>
     </div>
     <p v-else class="text-gray-600 text-center">دسته بندی وجود ندارد</p>

@@ -54,8 +54,8 @@
           unstyled
           type="button"
           label="خیر"
-          class="border border-red-500 px-5 py-1.5 rounded text-red-500"
-          severity="secondary"
+          class="border border-red-500 px-5 py-1.5 rounded text-red-500 hover:bg-red-500 hover:text-white transition-all cursor-pointer"
+F          severity="secondary"
           @click="visible = false"
         ></Button>
         <Button
@@ -99,7 +99,7 @@
           unstyled
           type="button"
           label="لغو"
-          class="border border-red-500 px-5 py-1.5 rounded text-red-500"
+          class="border border-red-500 px-5 py-1.5 rounded text-red-500 hover:bg-red-500 hover:text-white transition-all cursor-pointer"
           severity="secondary"
           @click="closeEditModal"
         ></Button>

@@ -5,7 +5,7 @@
       <p class="mt-3">محصول جدید و اطلاعات آن را اضافه کنید</p>
     </div>
     <div>
-      <form @submit.prevent="addProductFunc">
+      <form @submit.prevent>
         <div class="grid grid-cols-2 gap-5 mt-4">
           <div>
             <label for="product-title">عنوان</label>
@@ -36,12 +36,19 @@
           </div>
           <div>
             <label for="product-category">دسته بندی</label>
-            <input
-              type="text"
-              id="product-category"
-              class="cinput mt-2"
+            <select
               v-model="productData.category"
-            />
+              id="product-category"
+              class="select mt-2 border-black block w-full"
+            >
+              <option
+                v-for="item in category.categorys"
+                :key="item._id"
+                :value="item._id"
+              >
+                {{ item.title }}
+              </option>
+            </select>
           </div>
           <div>
             <label for="product-status">وضعیت سیمکارت</label>
@@ -105,8 +112,9 @@
           class="rounded-lg mt-5"
         />
         <button
+          @click="addProductFunc"
           v-if="!loading"
-          class="bg-black text-white px-4 py-3 rounded w-fit flex items-center justify-center gap-2 mt-5"
+          class="bg-black text-white px-4 py-3 rounded w-fit flex items-center justify-center gap-2 mt-5 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -131,20 +139,23 @@
         </button>
       </form>
     </div>
+    <Toast />
   </div>
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
-
 useHead({
   title: 'افزودن محصول'
+})
+
+let { data: category } = await useFetch('/api/admin/categories/getCategory', {
+  credentials: 'include'
 })
 
 let productData = reactive({
   title: '',
   price: '',
-  category: '66e1b25160bc025eabbb1b9f',
+  category: '',
   dec: '',
   img: '',
   customername: 'amir',
@@ -171,12 +182,12 @@ function handleImageUpload (event) {
   reader.readAsDataURL(file)
 }
 
-let toast = useToast()
+let { showToast } = useToastComp()
 let loading = ref(false)
 
 async function addProductFunc () {
   if (!productData.title || !productData.price || !productData.category)
-    toast.error('لطفا تمامی فیلد هارا پر کنید و حداقل یک عکس انتخاب کنید')
+    showToast('error', 'خطا', 'لطفا تمامی فیلد های مورد نیاز را پر کنید')
   else {
     try {
       loading.value = true
@@ -205,10 +216,9 @@ async function addProductFunc () {
         body: formData
       })
 
-      toast.success(data.message)
-      return navigateTo('/admin-panel/products')
+      showToast('محصول با موفقیت اضافه شد')
     } catch (error) {
-      toast.error(error?.data?.message || 'خطایی رخ داده است')
+      showToast('error', 'خطا', error.data)
     } finally {
       loading.value = false
     }

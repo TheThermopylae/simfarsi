@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-5">
+  <section>
     <div
       v-for="item in items"
       :key="item.key"

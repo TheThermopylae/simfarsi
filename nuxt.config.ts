@@ -17,15 +17,6 @@ const MyPreset = definePreset(Aura, {
       900: '#000',
       950: '#000'
     },
-    mySelect: {
-      optionSelectedBackground: "black"
-    },
-    components: {
-      select: {
-        optionSelectedBackground: "black",
-        optionSelectedFocusBackground: 'black'
-      }
-    }
   },
 })
 
@@ -35,7 +26,8 @@ export default defineNuxtConfig({
       bodyAttrs: {
         dir: 'rtl'
       }
-    }
+    },
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
@@ -67,4 +59,5 @@ export default defineNuxtConfig({
       API_BASE_URL: process.env.API_BASE_URL
     },
   },
+
 })

@@ -1,10 +1,12 @@
 <template>
-  <div class="container">
-    <MainHeroSlider></MainHeroSlider>
-  </div>
-  <MainTheCategories></MainTheCategories>
-  <AmazingSection></AmazingSection>
-  <AdSection></AdSection>
+  <main>
+    <div class="container">
+      <MainHeroSlider></MainHeroSlider>
+    </div>
+    <MainTheCategories></MainTheCategories>
+    <AmazingSection></AmazingSection>
+    <AdSection></AdSection>
+  </main>
 </template>
 
 <script setup>

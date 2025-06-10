@@ -2,7 +2,7 @@
   <div class="flex items-center justify-between">
     <div class="flex gap-1">
       <nuxtLink
-        to="/"
+        to="/user-panel/settings"
         class="w-[35px] h-[35px] bg-[#E5E7EB] flex justify-center items-center rounded-full"
         ><svg
           width="17"

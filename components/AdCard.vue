@@ -61,7 +61,11 @@
           <span>سرمایه گذاری</span>
         </div>
       </div>
-      <img :src="`${$config.public.API_BASE_URL}${props.data.img}`" class="w-[91px] h-[92px] rounded-md" alt="" />
+      <img
+        :src="`${$config.public.API_BASE_URL}${props.data.img}`"
+        class="w-[91px] h-[92px] rounded-md"
+        alt=""
+      />
     </div>
   </article>
 </template>
