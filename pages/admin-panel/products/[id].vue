@@ -36,12 +36,16 @@
           </div>
           <div>
             <label for="product-category">دسته بندی</label>
-            <input
-              type="text"
+            <!-- <input type="text" id="product-category" class="cinput mt-2" /> -->
+            <select
               id="product-category"
-              class="cinput mt-2"
               v-model="productData.category"
-            />
+              class="select mt-2 border-black"
+            >
+              <option v-for="item in categories.categorys" :value="item._id">
+                {{ item.title }}
+              </option>
+            </select>
           </div>
           <div>
             <label for="product-status">وضعیت سیمکارت</label>
@@ -98,12 +102,6 @@
             />
           </div>
         </div>
-        <img
-          v-if="showImage"
-          :src="showImage"
-          alt="product-img"
-          class="rounded-lg mt-5"
-        />
         <button
           v-if="!loading"
           class="bg-black text-white px-4 py-3 rounded w-fit flex items-center justify-center gap-2 mt-5"
@@ -146,6 +144,13 @@ let { data: products } = await useAsyncData(() =>
     }
   })
 )
+let { data: categories } = await useAsyncData(() =>
+  $fetch('/api/admin/categories/getCategory', {
+    headers: {
+      credentials: 'include'
+    }
+  })
+)
 
 let route = useRoute()
 
@@ -158,70 +163,52 @@ let targetProduct = computed(() => {
 let productData = reactive({
   title: targetProduct.value?.title,
   price: targetProduct.value?.price,
-  category: '66e1b25160bc025eabbb1b9f',
+  category: targetProduct.value?.category,
   dec: targetProduct.value?.dec,
-  img: '',
-  customername: 'amir',
-  phone: '3432432',
-  ad_type: 'vip',
   simstatus: targetProduct.value?.simstatus,
   sale: targetProduct.value?.sale,
   Operator: targetProduct.value?.Operator,
-  Numbertype: targetProduct.value?.Numbertype,
-  userid: '66e19a59a77e50137b4e39ab'
+  Numbertype: targetProduct.value?.Numbertype
 })
 
-const showImage = ref('')
-
-function handleImageUpload (event) {
-  const file = event.target.files[0]
-  if (!file) return
-
-  productData.img = file
-  const reader = new FileReader()
-  reader.onload = e => {
-    showImage.value = e.target.result
-  }
-  reader.readAsDataURL(file)
-}
-
-let toast = useToast()
+let { showToast } = useToastComp()
 let loading = ref(false)
 
 async function addProductFunc () {
   if (!productData.title || !productData.price || !productData.category)
-    toast.error('لطفا تمامی فیلد هارا پر کنید و حداقل یک عکس انتخاب کنید')
+    showToast(
+      'error',
+      'خطا',
+      'لطفا تمامی فیلد هارا پر کنید و حداقل یک عکس انتخاب کنید'
+    )
   else {
     try {
       loading.value = true
-
-      let formData = new FormData()
-
-      formData.append('title', productData.title)
-      formData.append('price', productData.price)
-      formData.append('category', productData.category)
-      formData.append('img', productData.img)
-      formData.append('customername', productData.customername)
-      formData.append('phone', productData.phone)
-      formData.append('ad_type', productData.ad_type)
-      formData.append('simstatus', productData.simstatus)
-      formData.append('sale', productData.sale)
-      formData.append('Operator', productData.Operator)
-      formData.append('Numbertype', productData.Numbertype)
-      formData.append('userid', productData.userid)
 
       let data = await $fetch('/api/admin/products/updateProduct', {
         method: 'POST',
         headers: {
           credentials: 'include'
         },
-        body: formData
+        body: {
+          id: targetProduct.value._id,
+          title: productData.title,
+          category: productData.category,
+          dec: productData.dec,
+          price: productData.price,
+          simstatus: productData.simstatus,
+          sale: productData.sale,
+          Operator: productData.Operator,
+          Numbertype: productData.Numbertype
+        }
       })
 
-      toast.success(data.message)
-      return navigateTo('/admin-panel/products')
+      console.log(data)
+
+      showToast('مشمخصات محصول با موفقیت ویرایش شد')
     } catch (error) {
-      toast.error(error?.data?.message || 'خطایی رخ داده است')
+      showToast('error', 'خطا', error?.data?.message || 'خطایی رخ داده است')
+      console.log(error)
     } finally {
       loading.value = false
     }

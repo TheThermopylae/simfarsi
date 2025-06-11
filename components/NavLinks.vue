@@ -5,7 +5,7 @@
     >
       <NuxtLink
         active-class="text-black"
-        to="/auth"
+        :to="userData ? '/user-panel/user-account' : '/auth'"
         class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
       >
         <svg
@@ -102,6 +102,10 @@
     </div>
   </section>
 </template>
+
+<script setup>
+let { userData } = userAuth()
+</script>
 
 <style scoped>
 * {

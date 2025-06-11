@@ -1,3 +1,3 @@
 <template>
-    <ShopDetails></ShopDetails>
+  <ShopDetails></ShopDetails>
 </template>

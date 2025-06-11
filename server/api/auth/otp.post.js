@@ -1,6 +1,5 @@
 export default defineEventHandler(async event => {
   let body = await readBody(event)
-  console.log(body)
 
   try {
     let data = await $fetch('http://localhost:4000/auth/otp', {
@@ -15,15 +14,11 @@ export default defineEventHandler(async event => {
       path: '/'
     })
 
-    console.log(data.data)
-
     let user = await $fetch('http://localhost:4000/user/profile', {
       headers: {
         Authorization: `Bearer ${data.data}`
       }
     })
-
-    console.log(user)
 
     return user
   } catch (err) {

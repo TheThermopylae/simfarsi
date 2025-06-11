@@ -13,7 +13,7 @@
     <td>{{ props.product._id }}</td>
     <td>{{ props.product.dec }}</td>
     <td>{{ props.product.price.toLocaleString() }} تومان</td>
-    <td>{{ props.product.category }}</td>
+    <td>{{ props.product.category?.title }}</td>
     <td>{{ props.product.customername }}</td>
     <td>{{ props.product.phone }}</td>
     <td>{{ props.product.ad_type }}</td>

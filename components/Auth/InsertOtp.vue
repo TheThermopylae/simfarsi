@@ -12,10 +12,25 @@
     <p class="text-center my-8 text-2sm">درخواست مجدد (00:30)</p>
     <form @submit.prevent="sendOtp">
       <div class="flex justify-center mb-9">
-        <InputOtp v-model="otp" :length="5" style="direction: ltr" integer-only />
+        <InputOtp
+          v-model="otp"
+          :length="5"
+          style="direction: ltr"
+          integer-only
+        />
       </div>
-      <button class="bg-black text-white rounded w-full p-2 text-xs">
+      <button
+        v-if="!loading"
+        class="bg-black text-white rounded w-full p-2 text-xs h-8 flex.center"
+      >
         ورود به سیم شاپ
+      </button>
+      <button
+        v-else
+        disabled
+        class="bg-black text-white rounded w-full p-2 text-xs h-8 flex-center"
+      >
+        <LoadingSpinner class="w-3"></LoadingSpinner>
       </button>
     </form>
     <p class="text-center text-[10px] mt-10">
@@ -31,11 +46,17 @@
 <script setup>
 const toast = useToast()
 
+let { userData } = userAuth()
+
 let props = defineProps(['phone'])
 let otp = ref('')
 
+let loading = ref(false)
+
 async function sendOtp () {
   try {
+    loading.value = true
+
     let data = await $fetch('/api/auth/otp', {
       method: 'POST',
       body: { phone: '09905457180', otp: otp.value }
@@ -44,9 +65,15 @@ async function sendOtp () {
     toast.add({
       severity: 'success',
       summary: 'موفقیت آمیز',
-      detail: 'ثبت نام شما با موفقیت انجام شد',
+      detail: ' ثبت نام شما با موفقیت انجام شد. در حال هدایت به صفحه ی اصلی',
       life: 5000
     })
+
+    userData.value = data.data
+
+    setTimeout(() => {
+      return navigateTo('/')
+    }, 5000)
   } catch (err) {
     console.log(err)
   }

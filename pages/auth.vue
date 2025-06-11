@@ -1,13 +1,15 @@
 <template>
-  <Toast />
-  <AuthBackSection></AuthBackSection>
-  <div class="container">
-    <AuthInsertPhone
-      @showOtpEmit="showOtpFunc"
-      v-if="!showOtp"
-    ></AuthInsertPhone>
-    <AuthInsertOtp :phone="phone" v-else></AuthInsertOtp>
-  </div>
+  <main>
+    <Toast />
+    <AuthBackSection></AuthBackSection>
+    <div class="container">
+      <AuthInsertPhone
+        @showOtpEmit="showOtpFunc"
+        v-if="!showOtp"
+      ></AuthInsertPhone>
+      <AuthInsertOtp :phone="phone" v-else></AuthInsertOtp>
+    </div>
+  </main>
 </template>
 
 <script setup>
@@ -20,7 +22,8 @@ useHead({
 let phone = ref('')
 
 definePageMeta({
-  layout: false
+  layout: false,
+  middleware: 'logged-in'
 })
 
 let showOtp = ref(false)
