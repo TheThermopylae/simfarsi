@@ -1,6 +1,6 @@
 <template>
   <header
-    class="pb-5 pt-3 fixed w-full z-10 bg-white top-0 transition-all duration-300"
+    class="pb-5 pt-3 fixed w-full z-10 bg-white top-0 transition-all duration-300 conainer left-1/2 -translate-x-1/2"
     :class="{ shadow: scrolled > 50 }"
   >
     <div class="container">

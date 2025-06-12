@@ -55,7 +55,8 @@
           type="button"
           label="خیر"
           class="border border-red-500 px-5 py-1.5 rounded text-red-500 hover:bg-red-500 hover:text-white transition-all cursor-pointer"
-F          severity="secondary"
+          F
+          severity="secondary"
           @click="visible = false"
         ></Button>
         <Button
@@ -120,6 +121,7 @@ F          severity="secondary"
 
 <script setup>
 let props = defineProps(['categoryId', 'subcategory'])
+
 let emit = defineEmits(['success', 'error', 'successEdit', 'errorEdit'])
 
 let title = ref(props.subcategory.title)
@@ -162,9 +164,14 @@ async function editCategory () {
   else {
     loadingEdit.value = true
     try {
-      let data = await $fetch('/api/admin/categories/editCategory', {
+      let data = await $fetch('/api/admin/categories/editSubCategory', {
         credentials: 'include',
-        body: { ...props.subcategory, title: title.value },
+        body: {
+          categoryId: props.categoryId,
+          ...props.subcategory,
+          subId : props.subcategory._id,
+          title: title.value
+        },
         method: 'POST'
       })
 

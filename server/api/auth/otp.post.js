@@ -1,8 +1,9 @@
 export default defineEventHandler(async event => {
   let body = await readBody(event)
+  let config = useRuntimeConfig()
 
   try {
-    let data = await $fetch('http://localhost:4000/auth/otp', {
+    let data = await $fetch(`${config.public.API_BASE_URL}/auth/otp`, {
       method: 'POST',
       body
     })
@@ -14,7 +15,7 @@ export default defineEventHandler(async event => {
       path: '/'
     })
 
-    let user = await $fetch('http://localhost:4000/user/profile', {
+    let user = await $fetch(`${config.public.API_BASE_URL}/user/profile`, {
       headers: {
         Authorization: `Bearer ${data.data}`
       }

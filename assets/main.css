@@ -28,6 +28,11 @@
     outline: none;
 }
 
+body {
+    max-width: 640px;
+    margin: auto;
+}
+
 @theme {
     --font-sans: "PeydaWebFaNum-Medium";
     --font-peydaB: "PeydaWebFaNum-Bold";
@@ -40,21 +45,10 @@
 @utility container {
     margin: auto;
     padding-inline: 1rem;
+    max-width : 640px;
 
     @variant sm {
         padding-inline: 2rem;
-    }
-
-    @variant lg {
-        padding-inline: 4rem;
-    }
-
-    @variant xl {
-        padding-inline: 5rem;
-    }
-
-    @variant 2xl {
-        padding-inline: 6rem;
     }
 }
 

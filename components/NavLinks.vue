@@ -44,7 +44,7 @@
         کالای دیجیتال
       </NuxtLink>
       <NuxtLink
-        to="/user-panel/ad"
+        to="/user/ad"
         class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
       >
         <svg

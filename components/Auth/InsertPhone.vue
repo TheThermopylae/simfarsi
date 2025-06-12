@@ -50,7 +50,7 @@ async function sendPhone () {
         life: 5000
       })
     } else {
-      let data = await $fetch(`http://localhost:4000/auth/register`, {
+      let data = await $fetch(`${config.public.API_BASE_URL}/auth/register`, {
         method: 'POST',
         body: { phone: '09905457180' }
       })
