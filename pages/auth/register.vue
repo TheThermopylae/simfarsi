@@ -3,10 +3,10 @@
     <Toast />
     <AuthBackSection></AuthBackSection>
     <div class="container">
-      <AuthInsertPhone
+      <AuthInsertPhoneReg
         @showOtpEmit="showOtpFunc"
         v-if="!showOtp"
-      ></AuthInsertPhone>
+      ></AuthInsertPhoneReg>
       <AuthInsertOtp :phone="phone" v-else></AuthInsertOtp>
     </div>
   </main>

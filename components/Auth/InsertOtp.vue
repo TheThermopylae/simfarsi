@@ -59,7 +59,7 @@ async function sendOtp () {
 
     let data = await $fetch('/api/auth/otp', {
       method: 'POST',
-      body: { phone: '09905457180', otp: otp.value }
+      body: { phone: props.phone, otp: otp.value }
     })
 
     toast.add({

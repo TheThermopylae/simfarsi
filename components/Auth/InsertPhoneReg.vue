@@ -19,8 +19,9 @@
         class="border border-[#6E6D6D] rounded w-full mt-20 mb-10 p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
       />
       <button class="bg-black text-white rounded w-full p-2 text-xs">
-        ورود به سیم شاپ
-      </button>
+        ورود به سیم شاپ</button
+      >
+      <NuxtLink class="mt-3 text-xs block" to="/auth/login">حساب دارید؟ وارد شوید</NuxtLink>
     </form>
     <p class="text-center text-[10px] mt-10">
       <NuxtLink to="/" class="font-peydaB">شرایط و قوانین استفاده</NuxtLink>

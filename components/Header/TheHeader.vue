@@ -38,15 +38,20 @@
         </div>
         <div class="flex gap-2">
           <div class="relative flex-grow">
-            <input
-              v-if="route.path != '/search'"
-              @keydown.{keyAlias}.enter="searchProduct"
-              v-model="searchValue"
+            <!-- <input
+              @keydown.{keyAlias}.enter="searchHashtag"
+              v-model="hashtagValue"
               type="text"
               id="search"
-              class="bg-[#F8F8F8] rounded-full placeholder:text-center py-1.5 h-[35px] w-full px-2 text-xs"
-              placeholder="جستجو"
-            />
+
+              placeholder="#هشتگ"
+            /> -->
+            <NuxtLink
+              to="/media"
+              class="bg-[#F8F8F8] rounded-full flex-center py-1.5 h-[35px] w-[160px] px-2 text-xs"
+            >
+              #هشتگ
+            </NuxtLink>
             <button
               @click="visibleBottom = true"
               class="absolute left-0 bottom-0 bg-black w-[35px] h-[35px] rounded-full flex justify-center items-center"
@@ -66,19 +71,19 @@
             </button>
           </div>
           <nuxtLink
-            to="/"
-            class="w-[35px] h-[35px] bg-[#E5E7EB] flex justify-center items-center rounded-full"
+            to="/search"
+            class="w-[35px] h-[35px] bg-[#E5E7EB] flex-center rounded-full"
           >
             <svg
               width="17"
-              height="15"
-              viewBox="0 0 17 15"
+              height="17"
+              viewBox="0 0 17 17"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M14.7818 0H1.69091C0.763636 0 0 0.763636 0 1.69091V10.6364C0 11.5636 0.763636 12.3273 1.69091 12.3273H5.67273L7.55454 14.6182C7.71818 14.8909 7.96364 15 8.23636 15C8.50909 15 8.75455 14.8909 8.91818 14.6727L10.8 12.3818H14.7818C15.7091 12.3818 16.4727 11.6182 16.4727 10.6909V1.71818C16.4727 0.763636 15.7091 0 14.7818 0ZM15.2727 10.6636C15.2727 10.9364 15.0545 11.1545 14.7818 11.1545H10.7727C10.4727 11.1545 10.1727 11.2636 9.95455 11.4818C9.92727 11.5091 9.92727 11.5091 9.9 11.5364L8.23636 13.5818L6.57273 11.5364C6.54545 11.5091 6.54545 11.5091 6.51818 11.4818C6.3 11.2636 6.02727 11.1545 5.7 11.1545H1.69091C1.41818 11.1545 1.2 10.9364 1.2 10.6636V1.71818C1.2 1.44545 1.41818 1.22727 1.69091 1.22727H14.7818C15.0545 1.22727 15.2727 1.44545 15.2727 1.71818V10.6636Z"
-                fill="#101011"
+                d="M15.6778 17L9.72778 11.05C9.25556 11.4278 8.7125 11.7269 8.09861 11.9472C7.48472 12.1676 6.83148 12.2778 6.13889 12.2778C4.42315 12.2778 2.97106 11.6836 1.78264 10.4951C0.594213 9.30671 0 7.85463 0 6.13889C0 4.42315 0.594213 2.97106 1.78264 1.78264C2.97106 0.594213 4.42315 0 6.13889 0C7.85463 0 9.30671 0.594213 10.4951 1.78264C11.6836 2.97106 12.2778 4.42315 12.2778 6.13889C12.2778 6.83148 12.1676 7.48472 11.9472 8.09861C11.7269 8.7125 11.4278 9.25556 11.05 9.72778L17 15.6778L15.6778 17ZM6.13889 10.3889C7.31944 10.3889 8.32292 9.97569 9.14931 9.14931C9.97569 8.32292 10.3889 7.31944 10.3889 6.13889C10.3889 4.95833 9.97569 3.95486 9.14931 3.12847C8.32292 2.30208 7.31944 1.88889 6.13889 1.88889C4.95833 1.88889 3.95486 2.30208 3.12847 3.12847C2.30208 3.95486 1.88889 4.95833 1.88889 6.13889C1.88889 7.31944 2.30208 8.32292 3.12847 9.14931C3.95486 9.97569 4.95833 10.3889 6.13889 10.3889Z"
+                fill="black"
               />
             </svg>
           </nuxtLink>
@@ -160,22 +165,22 @@
 <script setup>
 let route = useRoute()
 
-let searchValue = ref('')
+let hashtagValue = ref('')
 
 const visibleBottom = ref(false)
 const value = ref([0, 200])
 let numberValue = ref(null)
 
-async function searchProduct () {
-  if (searchValue.value)
+async function searchHashtag () {
+  if (hashtagValue.value)
     await navigateTo({
-      path: '/search',
+      path: '/media',
       query: {
-        search: searchValue.value
+        hashtag: hashtagValue.value
       }
     })
 
-  searchValue.value = ''
+  hashtagValue.value = ''
 }
 
 let scrolled = ref(null)
