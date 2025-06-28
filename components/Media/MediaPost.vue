@@ -1,5 +1,6 @@
 <template>
-  <article class="mb-5 last:m-0">
+  <article ref="postElement" class="mb-5 last:mb-32">
+    <!-- Header -->
     <div class="container mb-3 flex justify-between items-center">
       <div class="flex gap-2 items-center">
         <img
@@ -12,25 +13,224 @@
           <span class="text-[#707070]">ایران آیفون</span>
         </div>
       </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-      >
-        <g
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-        >
-          <circle cx="8" cy="2.5" r=".75" />
-          <circle cx="8" cy="8" r=".75" />
-          <circle cx="8" cy="13.5" r=".75" />
-        </g>
-      </svg>
+      <Button
+        unstyled
+        type="button"
+        icon="pi pi-ellipsis-v"
+        @click="toggle"
+        aria-haspopup="true"
+        aria-controls="overlay_menu"
+      />
+      <Menu
+        pt:submenuLabel="!hidden"
+        ref="menu"
+        id="overlay_menu"
+        :model="items"
+        :popup="true"
+      />
     </div>
-    <img src="/media/post.svg" alt="post" class="w-full h[315px]" />
+
+    <!-- Swiper Media -->
+    <swiper
+      :pagination="true"
+      :space-between="5"
+      :modules="modules"
+      class="mySwiper h-[300px] w-full"
+    >
+      <swiper-slide
+        v-for="(item, index) in props.data.media"
+        :key="index"
+        class="h-full w-full relative flex justify-center items-center"
+      >
+        <!-- Video -->
+        <div v-if="isVideo(item)" class="relative w-full h-full">
+          <video
+            :ref="el => (videoRefs[index] = el)"
+            class="w-full h-full object-cover"
+            playsinline
+            loop
+            :data-src="`${config.public.API_BASE_URL}${item}`"
+            @loadedmetadata="e => setVideoDuration(index, e)"
+            @timeupdate="e => onTimeUpdate(index, e)"
+          ></video>
+          <!-- Remaining time -->
+          <div
+            class="absolute bottom-2 left-2 bg-black/60 text-white text-[11px] px-2 py-0.5 rounded"
+          >
+            {{ formatDuration(videoRemaining[index] ?? 0) }}
+          </div>
+        </div>
+
+        <!-- Image -->
+        <img
+          v-else
+          :src="`${config.public.API_BASE_URL}${item}`"
+          :alt="props.data.caption"
+          class="w-full h-full object-cover"
+        />
+      </swiper-slide>
+    </swiper>
+
+    <!-- Caption -->
+    <p class="container text-xs mt-3">{{ props.data.caption }}</p>
+
+    <!-- Delete Dialog -->
+    <Dialog
+      v-model:visible="visible"
+      modal
+      header="حذف پست"
+      :style="{ width: '90%' }"
+    >
+      <span class="text-surface-500 dark:text-surface-400 block mb-8">
+        آیا می‌خواهید این پست را حذف کنید؟
+      </span>
+      <div class="grid grid-cols-2 gap-2">
+        <Button
+          type="button"
+          pt:root="!bg-white !border !border-red-500 !text-red-500 !rounded"
+          label="خیر"
+          @click="visible = false"
+        />
+        <Button
+          :loading="loading"
+          type="button"
+          label="بله"
+          severity="primary"
+          @click="removePostFunc"
+        />
+      </div>
+    </Dialog>
   </article>
 </template>
+
+<script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Pagination } from 'swiper/modules'
+
+const modules = [Pagination]
+const config = useRuntimeConfig()
+
+const props = defineProps(['data'])
+const emit = defineEmits(['success', 'error'])
+
+const visible = ref(false)
+const loading = ref(false)
+const menu = ref()
+
+// Ref های ویدیو
+const videoRefs = reactive([])
+const videoDurations = ref({})
+const videoRemaining = ref({})
+
+// مدیریت تایمرها
+const intervalRefs = {}
+
+// منو
+const items = ref([
+  {
+    items: [
+      {
+        label: 'حذف پست',
+        icon: 'pi pi-trash',
+        command: () => (visible.value = true)
+      }
+    ]
+  }
+])
+
+const toggle = e => menu.value.toggle(e)
+
+async function removePostFunc () {
+  try {
+    loading.value = true
+    await $fetch('/api/media/removePost', {
+      credentials: 'include',
+      method: 'POST',
+      body: { id: props.data.uuid }
+    })
+    emit('success')
+    visible.value = false
+  } catch (err) {
+    emit('error')
+  } finally {
+    loading.value = false
+  }
+}
+
+const isVideo = filename =>
+  /\.(mp4|webm|ogg|mov|avi|mkv)$/i.test(filename)
+
+const setVideoDuration = (index, e) => {
+  const duration = Math.floor(e.target.duration)
+  videoDurations.value[index] = duration
+  videoRemaining.value[index] = duration
+}
+
+const formatDuration = seconds => {
+  const mins = Math.floor(seconds / 60)
+  const secs = Math.floor(seconds % 60)
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`
+}
+
+// تایمر معکوس و ریست آن هنگام لوپ
+const onTimeUpdate = (index, e) => {
+  const video = e.target
+  if (video.currentTime < 0.5) {
+    videoRemaining.value[index] = videoDurations.value[index]
+  }
+}
+
+onMounted(() => {
+  if (typeof window === 'undefined') return
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        const video = entry.target
+        const index = videoRefs.indexOf(video)
+        if (index === -1) return
+
+        if (entry.isIntersecting) {
+          if (!video.src && video.dataset.src) {
+            video.src = video.dataset.src
+          }
+          video.play().catch(() => {})
+
+          // ریست تایمر به مدت کل ویدیو
+          videoRemaining.value[index] = videoDurations.value[index]
+
+          if (!intervalRefs[index]) {
+            intervalRefs[index] = setInterval(() => {
+              if (videoRemaining.value[index] > 0) {
+                videoRemaining.value[index]--
+              }
+            }, 1000)
+          }
+        } else {
+          video.pause()
+          video.currentTime = 0  // اینجا زمان ویدیو رو صفر کن
+          if (intervalRefs[index]) {
+            clearInterval(intervalRefs[index])
+            intervalRefs[index] = null
+          }
+        }
+      })
+    },
+    { threshold: 0.5 }
+  )
+
+  nextTick(() => {
+    videoRefs.forEach(video => {
+      if (video && typeof video.play === 'function') {
+        observer.observe(video)
+      }
+    })
+  })
+})
+
+onBeforeUnmount(() => {
+  Object.values(intervalRefs).forEach(clearInterval)
+})
+</script>

@@ -36,7 +36,7 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-  css: ['~/assets/main.css'],
+  css: ['~/assets/main.css', 'primeicons/primeicons.css'],
   modules: ['@primevue/nuxt-module', '@nuxt/image'],
   primevue: {
     options: {
@@ -59,5 +59,7 @@ export default defineNuxtConfig({
       API_BASE_URL: process.env.API_BASE_URL
     },
   },
-
+  devServer: {
+    port: 4000
+  },
 })

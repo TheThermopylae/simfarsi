@@ -7,7 +7,7 @@
       class="mySwiper"
     >
       <swiper-slide class="text-2sm">
-        <div class="text-cente">
+        <!-- <div class="text-cente">
           <div class="flex-center w-[52px] h-[52px] rounded-full bg-black mb-2">
             <svg
               width="15"
@@ -23,7 +23,8 @@
             </svg>
           </div>
           افزودن استوری
-        </div>
+        </div> -->
+        <media-add-story-inp />
       </swiper-slide>
       <swiper-slide v-for="item in 10">
         <div class="w-[55px] h-[55px] border rounded-full flex-center">

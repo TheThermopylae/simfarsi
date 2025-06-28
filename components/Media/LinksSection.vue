@@ -20,6 +20,15 @@
         ></div>
       </Transition>
     </div>
+    <div class="relative pb-3 w-[60px] text-center">
+      <NuxtLink to="/media/user/me">پروفایل</NuxtLink>
+      <Transition>
+        <div
+          v-if="route.path == '/media/user/me'"
+          class="w-full h-[4px] rounded-t-full bg-black absolute bottom-0"
+        ></div>
+      </Transition>
+    </div>
   </section>
 </template>
 

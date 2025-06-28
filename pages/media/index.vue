@@ -1,8 +1,28 @@
 <template>
   <div>
     <MediaStorySlider />
-    <MediaPost v-for="item in 10" />
-    <MediaAddPost />
+    <section>
+      <MediaPost
+        v-if="posts"
+        v-for="item in posts.data"
+        :data="item"
+        @success="showSuccessRemovePost"
+        @error="
+          showToast('error', 'خطا', 'مشکلی پیش آمده لطفا دوباره تلاش کنید')
+        "
+      />
+    </section>
+    <MediaAddPost @select-media="selectMediaFunc" />
+    <Transition>
+      <MediaAddPostScreen
+        @closePostScreen="showAddPostScreenFunc"
+        @success="showSuccessFunc"
+        @error="showErrorFunc"
+        v-if="showAddPostScreen && postData.img"
+        :data="postData"
+      />
+    </Transition>
+    <Toast />
   </div>
 </template>
 
@@ -10,4 +30,46 @@
 definePageMeta({
   layout: 'explore'
 })
+
+let { showToast } = useToastComp()
+
+let { data: posts, refresh } = await useFetch('/api/media/getPosts', {
+  credentials: 'include'
+})
+
+let postData = reactive({
+  caption: '',
+  hashtags: '',
+  img: [],
+  video: []
+})
+
+let showAddPostScreen = ref(false)
+
+function selectMediaFunc (img, video) {
+  postData.img = img
+  postData.video = video
+  showAddPostScreen.value = true
+}
+
+function showAddPostScreenFunc () {
+  postData.img = []
+  postData.video = []
+
+  showAddPostScreen.value = false
+}
+
+function showSuccessFunc () {
+  showToast('پست با موفقیت اضافه شد')
+  refresh()
+}
+
+function showErrorFunc (text) {
+  showToast('error', 'خطا', text)
+}
+
+function showSuccessRemovePost () {
+  showToast('پست با موفقیت حذف شد')
+  refresh()
+}
 </script>
