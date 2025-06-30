@@ -69,8 +69,7 @@ async function sendOtp () {
       life: 5000
     })
 
-    userData.value = data.data
-
+    userData.value = data.user    
     setTimeout(() => {
       return navigateTo('/')
     }, 5000)

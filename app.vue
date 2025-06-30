@@ -14,17 +14,12 @@ useHead({
 <style>
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.4s;
+  transition: all 0.2s;
 }
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.2s ease;
 }
 
 .v-enter-from,
@@ -40,7 +35,11 @@ useHead({
   class="w-full"
   :pt="{
     option: ({ context }) => ({
-      class: context.selected ? '!bg-black !text-white' : ''
-    })
+      class: context.selected ? '!bg-black !text-white !rounded-xl' : ''
+    }),
+    root: '!p-5 !bg-[#F8F8F8] !text-xs !rounded-2xl !mt-3',
+    label: '!p-0',
+    dropdownIcon: '!text-black',
+    overlay: '!bg-[#F8F8F8] !text-xs !rounded-2xl !border-none'
   }"
 /> -->

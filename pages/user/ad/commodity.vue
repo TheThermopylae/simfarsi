@@ -1,22 +1,22 @@
 <template>
   <main class="container">
-    <UserDashboardAdCommodityDetails
+    <AdCommodityDetails
       :data="commodityData"
       @nextStep="steps = 2"
       v-if="steps == 1"
     />
-    <UserDashboardAdSelectAdType
+    <AdSelectAdType
       :data="commodityData"
       @prevStep="steps = 1"
       v-if="steps == 2"
     />
-    <UserDashboardAdPayPage
+    <AdPayPage
       :payType="payType"
       v-if="steps == 3"
       @prevStep="steps = 2"
       @changePayType="chagngeTypeFunc"
     />
-    <UserDashboardAdPaySection
+    <AdPaySection
       :payType="payType"
       :steps="steps"
       :data="commodityData"
@@ -28,21 +28,22 @@
 
 <script setup>
 useHead({
-  title: '| افزودن آگهی سیمکارت'
+  title: '| افزودن آگهی کالای دیجیتال'
 })
 
-let steps = ref(2)
+let steps = ref(1)
 
 let payType = ref(0)
 
 let commodityData = reactive({
-  title: '324234',
-  dec: '423432',
+  title: '',
+  dec: '',
   category: '',
   ad_type: 'free',
   sale: 'نقد',
-  price: 5000,
-  img: 's'
+  price: '',
+  img: '',
+  division: 'digi'
 })
 
 function chagngeTypeFunc (item) {

@@ -175,7 +175,7 @@ let emit = defineEmits(['refreshing'])
 let loading = ref(false)
 let acceptLoading = ref(false)
 
-let toast = useToast()
+let { showToast } = useToastComp()
 
 async function acceptProductFunc () {
   try {
@@ -188,15 +188,9 @@ async function acceptProductFunc () {
     })
 
     await refreshProducts()
-    toast.add({
-      severity: 'success',
-      summary: 'موفقیت آمیز',
-      detail: data.data,
-      life: 5000
-    })
-    console.log(5)
+    showToast(data.data)
   } catch (err) {
-    console.log(err)
+    showToast('error', 'خطا', data.data)
   } finally {
     acceptLoading.value = false
   }
@@ -215,9 +209,9 @@ async function deleteProduct () {
     })
 
     emit('deletedProduct')
-    toast.success('محصول مورد نظر شما حذف شد')
+    showToast('محصول مورد نظر شما حذف شد')
   } catch (error) {
-    toast.error(error.data.message)
+    showToast('error', 'خطا', error.data.message)
   } finally {
     loading.value = false
   }

@@ -82,9 +82,12 @@ definePageMeta({
   layout: 'explore'
 })
 
+useHead({
+  title : '| پروفایل من'
+})
+
 const config = useRuntimeConfig()
 
-// توابع کمکی برای تشخیص نوع پست
 const isVideo = filename => {
   return /\.(mp4|webm|ogg|mov|avi|mkv)$/i.test(filename)
 }
@@ -97,12 +100,9 @@ const isSingleImage = media => {
   return media?.length === 1 && !isVideo(media[0])
 }
 
-// واکشی داده‌ها
 let { data: posts } = await useFetch('/api/media/getPosts', {
   credentials: 'include'
 })
-
-console.log(posts.value)
 
 let { data: followers } = await useFetch('/api/media/getFollowers', {
   credentials: 'include'

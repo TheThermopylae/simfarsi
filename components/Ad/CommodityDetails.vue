@@ -1,28 +1,5 @@
 <template>
   <div class="mb-4">
-    <label for="number" class="font-peydaB text-xs"> دسته بندی</label>
-    <Select
-      v-model="props.data.category"
-      :options="category.categorys"
-      optionLabel="title"
-      placeholder="دسته بندی مرتبط با آگهی خود را انتخاب کنید"
-      class="w-full"
-      :pt="{
-        option: ({ context }) => ({
-          class: context.selected ? '!bg-black !text-white' : ''
-        }),
-        root: '!p-5 !bg-[#F8F8F8] !text-xs !rounded-2xl !mt-3',
-        label: '!p-0',
-        dropdownIcon: '!hidden'
-      }"
-    />
-  </div>
-  <div class="mb-4">
-    <label class="font-peydaB text-xs">عکس آگهی</label>
-    <UserDashboardUploadPic></UserDashboardUploadPic>
-    <p class="text-red-500 text-2sm">افزودن حداقل 1 عکس الزامیست</p>
-  </div>
-  <div class="mb-4">
     <label for="title" class="font-peydaB text-xs">عنوان آگهی</label>
     <div class="relative">
       <input
@@ -46,6 +23,54 @@
           fill="#E8EAED"
         />
       </svg>
+    </div>
+  </div>
+  <div class="mb-4">
+    <label for="price" class="font-peydaB text-xs">قیمت محصول</label>
+    <input
+      v-model="props.data.price"
+      type="number"
+      id="price"
+      class="bg-[#F8F8F8] rounded-2xl p-5 block w-full mt-3 placeholder:text-xs placeholder:text-black text-xs"
+      placeholder="قیمت محصول خود را بنویسید"
+    />
+  </div>
+  <div class="mb-4">
+    <label for="number" class="font-peydaB text-xs"> دسته بندی</label>
+    <Select
+      v-model="props.data.category"
+      :options="category.categorys"
+      optionLabel="title"
+      placeholder="دسته بندی مرتبط با آگهی خود را انتخاب کنید"
+      class="w-full"
+      :pt="{
+        option: ({ context }) => ({
+          class: context.selected ? '!bg-black !text-white' : ''
+        }),
+        root: '!p-5 !bg-[#F8F8F8] !text-xs !rounded-2xl !mt-3',
+        label: '!p-0',
+        dropdownIcon: '!hidden'
+      }"
+    />
+  </div>
+  <div class="mb-4">
+    <label class="font-peydaB text-xs">عکس آگهی</label>
+    <AdUploadPic @selectedFile="selectFileFunc"></AdUploadPic>
+    <p class="text-red-500 text-2sm" v-if="!showImg">
+      افزودن یک عکس الزامیست
+    </p>
+    <!-- <img class="size-[60px] rounded-md" :src="showImg" v-if="showImg" alt="product-img" /> -->
+    <div class="flex items-center gap-3" v-else>
+      <Image
+        :src="showImg"
+        pt:image="!size-[60px] !rounded-md"
+        pt:rotateRightButton="!hidden"
+        pt:rotateLeftButton="!hidden"
+        pt:mask="!rounded-md"
+        alt="product-image"
+        preview
+      />
+      <p class="text-2sm">برای بزرگنمایی روی عکس ضربه بزنید</p>
     </div>
   </div>
   <div class="mb-4">
@@ -75,9 +100,7 @@
     </div>
   </div>
   <div class="flex justify-end">
-    <button class="btn-c rounded py-2 px-10" @click="oneStepFunc">
-      بعدی
-    </button>
+    <button class="btn-c rounded py-2 px-10" @click="oneStepFunc">بعدی</button>
   </div>
   <Toast />
 </template>
@@ -92,14 +115,42 @@ let { data: category } = await useFetch('/api/admin/categories/getCategory', {
   credentials: 'include'
 })
 
+let showImg = ref(null)
+
+function selectFileFunc (item) {
+  if (!item) return
+
+  props.data.img = item
+
+  // اگر فایل انتخاب شده است، آن را به Base64 تبدیل می‌کنیم
+  if (item instanceof File) {
+    const reader = new FileReader()
+
+    reader.onload = e => {
+      showImg.value = e.target.result
+    }
+
+    reader.onerror = error => {
+      console.error('Error converting file to Base64:', error)
+      showToast('error', 'خطا', 'تبدیل تصویر با مشکل مواجه شد')
+    }
+
+    reader.readAsDataURL(item)
+  } else if (typeof item === 'string') {
+    // اگر از قبل Base64 است
+    showImg.value = item
+  }
+}
+
 function oneStepFunc () {
   if (
     !props.data.title ||
     !props.data.category ||
     !props.data.dec ||
-    !props.data.img
+    !props.data.img ||
+    !props.data.price
   )
     showToast('error', 'خطا', 'لطفا تمامی فیلد هارا پر کنید')
-    else emit('nextStep')
+  else emit('nextStep')
 }
 </script>

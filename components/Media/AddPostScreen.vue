@@ -33,20 +33,46 @@
         <video :src="item" controls class="w-full h-full rounded-md"></video>
       </swiper-slide>
     </swiper>
-    <div
-      class="absolute bottom-5 flex justify-between gap-3 w-full right-0 px-5"
-    >
+    <div class="absolute bottom-5 w-full right-0 px-5">
+      <div class="flex gap-1 flex-wrap">
+        <Chip
+          removable
+          class="!text-xs"
+          v-for="(item, index) in hashtags"
+          :key="index"
+          :label="item"
+        >
+          <template #removeicon>
+            <i class="pi pi-minus-circle" @click="hashtags.splice(index, 1)" />
+          </template>
+        </Chip>
+      </div>
+      <div class="flex items-enter gap-3 my-3">
+        <Button
+          label="افزودن هشتگ"
+          class="!bg-white !text-black px-5 py-2 rounded-md !text-xs"
+          @click="addHashtag"
+        />
+        <input
+          type="text"
+          placeholder="هشتگ را وارد کنید"
+          class="placeholder:text-white border border-white flex-grow px-3 rounded-md text-white placeholder:text-xs text-xs"
+          v-model="hashtagInput"
+        />
+      </div>
+      <div class="flex items-ceter gap-3">
+        <input
+          type="text"
+          placeholder="کپشن پست را وارد کنید"
+          class="placeholder:text-white border border-white flex-grow py-2 px-3 rounded-md text-white placeholder:text-xs text-xs mb-3"
+          v-model="data.caption"
+        />
+      </div>
       <Button
         label="ثبت پست"
         :loading="loading"
-        class="!bg-white !text-black px-5 py-2 rounded-md text-xs"
+        class="!bg-white !text-black px-5 py-2 rounded-md !text-xs w-full"
         @click="sendPost"
-      />
-      <input
-        type="text"
-        placeholder="کپشن پست را وارد کنید"
-        class="placeholder:text-white border border-white flex-grow px-3 rounded-md text-white placeholder:text-xs text-xs"
-        v-model="data.caption"
       />
     </div>
   </section>
@@ -56,7 +82,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import { Pagination } from 'swiper/modules'
-import 'swiper/css/pagination' // استایل‌های Pagination
+import 'swiper/css/pagination'
 
 let props = defineProps(['data'])
 let emit = defineEmits(['closePostScreen', 'success', 'error'])
@@ -65,6 +91,8 @@ let loading = ref(false)
 
 let images = ref([])
 let videos = ref([])
+let hashtags = ref([])
+let hashtagInput = ref('')
 
 onMounted(() => {
   props.data.img.forEach(item => {
@@ -78,14 +106,27 @@ onMounted(() => {
   })
 })
 
+function addHashtag () {
+  if (!hashtagInput.value.trim()) {
+    emit('error', 'لطفا هشتگ را وارد کنید')
+  } else if (
+    hashtags.value.includes(hashtagInput.value.trim().replace(' ', '_'))
+  )
+    emit('error', 'این هشتگ قبلا اضافه شده است')
+  else {
+    hashtags.value.push(hashtagInput.value.trim().replace(' ', '_'))
+    hashtagInput.value = ''
+  }
+}
+
 async function sendPost () {
-  if (!props.data.caption) {
+  if (!props.data.caption.trim()) {
     emit('error', 'لطفا کپشن را وارد کنید')
     return
   } else {
     let formData = new FormData()
 
-    formData.append('caption', props.data.caption)
+    formData.append('caption', props.data.caption.trim())
     formData.append('hashtags', props.data.hashtags)
     props.data.img.forEach((file, index) => {
       formData.append(`img[${index}]`, file)
@@ -123,7 +164,8 @@ onUnmounted(() => {
   })
 
   props.data.caption = ''
-  // hashtags.value = ''
+  hashtags.value = []
+  hashtagInput.value = ''
 })
 </script>
 

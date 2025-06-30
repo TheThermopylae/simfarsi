@@ -17,6 +17,9 @@
 definePageMeta({
   layout: 'explore'
 })
+useHead({
+  title : '| اکسپلور'
+})
 
 let items = [
   'img',

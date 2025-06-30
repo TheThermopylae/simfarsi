@@ -31,6 +31,10 @@ definePageMeta({
   layout: 'explore'
 })
 
+useHead({
+  title : '| هشتگ'
+})
+
 let { showToast } = useToastComp()
 
 let { data: posts, refresh } = await useFetch('/api/media/getPosts', {

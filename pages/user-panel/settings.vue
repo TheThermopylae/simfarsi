@@ -4,19 +4,25 @@
     <section class="primary py-3 my-3 text-2sm">
       <div class="container">
         <p class="leading-[200%]">
-          شما با شماره موبایل 09120142811 وارد شده اید و آگهی های ثبت شده با این
-          شماره را مشاهده میکنید.
+          شما با شماره موبایل {{ userData.phone }} وارد شده اید و آگهی های ثبت
+          شده با این شماره را مشاهده میکنید.
         </p>
         <div class="flex justify-end">
-          <NuxtLink to="/" class="bg-white text-black rounded-[10px] p-2"
-            >خروج از حساب</NuxtLink
-          >
+          <Button
+            :loading="loading"
+            label="خروج از حساب کاربری"
+            @click="logoutFunc"
+            pt:root="!bg-white !text-black !rounded-[10px] !p-2 !text-2sm"
+          />
         </div>
       </div>
     </section>
     <ul class="container px-8">
       <li class="border-b border-gray-300 mb-4">
-        <NuxtLink to="/user-panel/user-account" class="flex justify-between items-center pb-4">
+        <NuxtLink
+          to="/user-panel/user-account"
+          class="flex justify-between items-center pb-4"
+        >
           حساب کاربری
           <svg
             width="10"
@@ -120,3 +126,35 @@
     </ul>
   </div>
 </template>
+
+<script setup>
+
+
+useHead({
+  title: '| تنظیمات'
+})
+
+let { userData } = userAuth()
+let { showToast } = useToastComp()
+
+let loading = ref(false)
+async function logoutFunc () {
+  loading.value = true
+  try {
+    let data = await $fetch('/api/auth/logout', {
+      credentials: 'include'
+    })
+
+    userData.value = null
+    return navigateTo('/')
+  } catch (error) {
+    showToast(
+      'error',
+      'خطا',
+      'خطایی در خروج از حساب کاربری رخ داد. لطفا دوباره تلاش کنید.'
+    )
+  } finally {
+    loading.value = false
+  }
+}
+</script>
