@@ -9,6 +9,6 @@
 
 <script setup>
 useHead({
-    title : '| انتخاب آدرس و پرداخت'
+  title: '| انتخاب آدرس و پرداخت'
 })
 </script>

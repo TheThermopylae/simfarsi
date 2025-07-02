@@ -59,14 +59,12 @@
     <p class="text-red-500 text-2sm" v-if="!showImg">
       افزودن یک عکس الزامیست
     </p>
-    <!-- <img class="size-[60px] rounded-md" :src="showImg" v-if="showImg" alt="product-img" /> -->
     <div class="flex items-center gap-3" v-else>
       <Image
         :src="showImg"
         pt:image="!size-[60px] !rounded-md"
         pt:rotateRightButton="!hidden"
         pt:rotateLeftButton="!hidden"
-        pt:mask="!rounded-md"
         alt="product-image"
         preview
       />

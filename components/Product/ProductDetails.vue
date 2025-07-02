@@ -19,13 +19,13 @@
 </template>
 
 <script setup>
+let props = defineProps(['data'])
+
 let items = ref([
-  { key: 'شماره', value: '09121077650' },
-  { key: 'اوپراتور', value: 'همراه اول - رند - کد 1' },
-  { key: 'وضعیت', value: 'در حد صفر' },
-  { key: 'شرایط فروش', value: 'نقد' },
-  { key: 'نوع رند', value: 'آینه ای-هزاری از آخر' },
-  { key: 'نوع شماره', value: 'دائمی' },
-  { key: 'توضیحات', value: 'رند آینه ای هزاری از آخر مناسب ترین قیمت' }
+  { key: 'شماره', value: props.data.phone },
+  { key: 'اوپراتور', value: props.data.Operator },
+  { key: 'وضعیت', value: props.data.simstatus },
+  { key: 'شرایط فروش', value: props.data.sale },
+  { key: 'توضیحات', value: props.data.dec }
 ])
 </script>

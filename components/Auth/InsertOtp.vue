@@ -2,7 +2,7 @@
   <section class="mt-7">
     <p class="font-peydaB">کد تایید را وارد کنید</p>
     <p class="my-8 text-xs text-center">
-      لطفا کد تاییدی را که به شماره 09120142811 پیامک شده را وارد کنید
+      لطفا کد تاییدی را که به شماره {{ props.phone }} پیامک شده را وارد کنید
     </p>
     <NuxtImg
       src="/auth/otp.svg"
@@ -69,7 +69,7 @@ async function sendOtp () {
       life: 5000
     })
 
-    userData.value = data.user    
+    userData.value = data.user
     setTimeout(() => {
       return navigateTo('/')
     }, 5000)

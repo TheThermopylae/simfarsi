@@ -14,14 +14,12 @@
         />
       </svg>
       <span class="font-peydaB">فروشگاه :</span>
-      <h3 class="text-c-primary font-peyda">ZarreTell</h3>
+      <h3 class="text-c-primary font-peyda">{{ props.data.customername }}</h3>
     </div>
     <div class="flex justify-between items-center mt-3 pr-5">
       <p class="text-[#747474] text-2sm font-peydaB">۶ ساعت پیش در تهران</p>
       <div class="text-xl">
-        <ClientOnly>
-          {{ randomPrice.toLocaleString() }}
-        </ClientOnly>
+        {{ props.data.price.toLocaleString() }}
         <span class="text-2sm mr-0.5">تومان</span>
       </div>
     </div>
@@ -65,5 +63,5 @@
 </template>
 
 <script setup>
-let randomPrice = ref(Math.floor(Math.random() * 250_000_000))
+let props = defineProps(['data'])
 </script>

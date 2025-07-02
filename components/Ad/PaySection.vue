@@ -37,7 +37,7 @@ async function submitAd () {
       let data = null
 
       if (props.data.division == 'sim') {
-        let fetchData = await $fetch('/api/ad/addUserAd', {
+        let fetchData = await $fetch('/api/ad/addSimAd', {
           credentials: 'include',
           body: props.data,
           method: 'POST'

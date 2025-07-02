@@ -4,9 +4,16 @@
   >
     <div class="flex gap-2 items-center">
       <img
+        v-if="props.data.division == 'digi'"
         :src="`${$config.public.API_BASE_URL}${props.data.img}`"
         :alt="`عکس ${props.data.title}`"
         class="w-[52px] h-[52px] rounded bg-white"
+      />
+      <img
+        v-else
+        :src="`/simlogo/${props.data.Operator}.png`"
+        class="w-[52px] h-[52px] rounded bg-white"
+        alt=""
       />
       <div class="text-xs">
         <h4 class="mb-3">{{ props.data.title }}</h4>

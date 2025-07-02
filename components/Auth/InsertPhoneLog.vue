@@ -1,6 +1,6 @@
 <template>
   <section class="mt-7">
-    <p class="font-peydaB">شماره موبایل خود را وارد کنید (لاگین)</p>
+    <p class="font-peydaB">شماره موبایل خود را وارد کنید</p>
     <p class="my-8 text-[12px]">
       برای استفاده از امکانات <strong>سیم کارت شاپ</strong>، لطفا شماره موبایل
       خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد.
@@ -21,9 +21,9 @@
       <button class="bg-black text-white rounded w-full p-2 text-xs">
         ورود به سیم شاپ
       </button>
-      <NuxtLink class="mt-3 text-xs block" to="/auth/login"
-        >حساب دارید؟ وارد شوید</NuxtLink
-      >
+      <NuxtLink class="mt-3 text-xs block" to="/auth/register"
+        >حساب ندارید؟ یکی بسازید
+      </NuxtLink>
     </form>
     <p class="text-center text-[10px] mt-10">
       <NuxtLink to="/" class="font-peydaB">شرایط و قوانین استفاده</NuxtLink>
@@ -44,6 +44,8 @@ let emit = defineEmits(['showOtpEmit'])
 let phone = ref('')
 
 async function sendPhone () {
+  let toStrNumber = String(phone.value)
+
   try {
     if (!phone.value) {
       toast.add({
@@ -55,10 +57,15 @@ async function sendPhone () {
     } else {
       let data = await $fetch(`${config.public.API_BASE_URL}/auth/login`, {
         method: 'POST',
-        body: { phone: phone.value }
+        body: {
+          phone: toStrNumber.startsWith('0') ? toStrNumber : 0 + toStrNumber
+        }
       })
 
-      emit('showOtpEmit', phone.value)
+      emit(
+        'showOtpEmit',
+        toStrNumber.startsWith('0') ? toStrNumber : 0 + toStrNumber
+      )
     }
   } catch (err) {
     toast.add({

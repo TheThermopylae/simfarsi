@@ -25,9 +25,8 @@
           />
         </svg>
       </nuxtLink>
-
       <nuxtLink
-        to="/"
+        to="/basket"
         class="w-[35px] h-[35px] bg-[#E5E7EB] flex justify-center items-center rounded-full"
         ><svg
           width="15"

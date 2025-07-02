@@ -15,7 +15,7 @@
             fill="black"
           />
         </svg>
-        ورود به حساب کاربری
+        <slot />
       </NuxtLink>
     </div>
   </section>

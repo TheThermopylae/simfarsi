@@ -5,13 +5,11 @@ export default defineEventHandler(async event => {
 
   try {
     let data = await $fetch(
-      `${config.public.API_BASE_URL}/admin/updateOrderStatus`,
+      `${config.public.API_BASE_URL}/admin/statusorder/${body.id}`,
       {
-        method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`
-        },
-        body
+        }
       }
     )
 

@@ -14,6 +14,40 @@
         >
       </div>
     </div>
-    <NuxtLink to="/" class="primary w-full block text-center p-3 rounded-md mt-3">پرداخت</NuxtLink>
+    <Button
+      pt:root="!w-full !block !text-center !p-2 !rounded-md !mt-3"
+      label="پرداخت"
+      :loading="loading"
+      @click="payFunc"
+    />
   </section>
 </template>
+
+<script setup>
+let localProducts = ref(
+  JSON.parse(localStorage.getItem('product')) || {
+    totalPrice: 0,
+    products: []
+  }
+)
+
+let loading = ref(false)
+
+async function payFunc () {
+  try {
+    loading.value = true
+
+    let data = await $fetch('/api/payment/buyproduct', {
+      credentials: 'include',
+      method: 'POST',
+      body: localProducts.value
+    })
+
+    console.log(data)
+  } catch (error) {
+    console.log(data)
+  } finally {
+    loading.value = false
+  }
+}
+</script>

@@ -1,14 +1,17 @@
 <template>
-  <tr class="relative">
+  <tr
+    class="relative"
+    :class="{ 'text-green-500': props.user.phone == userData.phone }"
+  >
     <td>{{ props.user._id }}</td>
-    <td>{{ props.user.date }}</td>
+    <td>{{ props.user.date.split('T')[0] }}</td>
     <td>{{ props.user.phone }}</td>
     <td>
       {{ props.user.role }}
       <div
         class="lg:tooltip"
         data-tip="تغییر نقش"
-        v-if="!loading && props.user.phone != '09905457180'"
+        v-if="!loading && props.user.phone != userData.phone"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +48,8 @@ let props = defineProps(['user'])
 let emit = defineEmits(['editUser', 'error'])
 
 let loading = ref(false)
+
+let { userData } = userAuth()
 
 async function changeRole () {
   loading.value = true

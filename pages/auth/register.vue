@@ -1,7 +1,7 @@
 <template>
   <main>
     <Toast />
-    <AuthBackSection></AuthBackSection>
+    <AuthBackSection>ساخت حساب</AuthBackSection>
     <div class="container">
       <AuthInsertPhoneReg
         @showOtpEmit="showOtpFunc"
