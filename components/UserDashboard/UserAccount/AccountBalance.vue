@@ -49,7 +49,7 @@
         eirmod tempor invidunt
       </p>
     </div>
-    <div class="grid grid-cols-2 gap-1 mt-3">
+    <div class="grid grid-cols-2 gap-1 mt-3 w-full">
       <div class="bg-[#f1f1f1] rounded-2xl px-4 py-3">
         <div class="flex justify-between items-center mb-2">
           <h3 class="text-xs">کیف پول</h3>

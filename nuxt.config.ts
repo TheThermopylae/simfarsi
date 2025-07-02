@@ -25,7 +25,10 @@ export default defineNuxtConfig({
     head: {
       bodyAttrs: {
         dir: 'rtl'
-      }
+      },
+      link: [
+        { rel: 'icon', href: '/logo.svg' }
+      ]
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },

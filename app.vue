@@ -21,6 +21,16 @@ useHead({
   opacity: 0;
   filter: blur(1rem);
 }
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
 
 <!-- <Select

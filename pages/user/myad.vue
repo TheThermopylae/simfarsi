@@ -25,6 +25,10 @@
 </template>
 
 <script setup>
+useHead({
+  title: '| آگهی های من'
+})
+
 let { data, refresh } = await useFetch('/api/ad/getAds', {
   credentials: 'include'
 })
