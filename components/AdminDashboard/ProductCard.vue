@@ -170,7 +170,7 @@ let showMenu = ref(false)
 
 let props = defineProps(['product'])
 
-let emit = defineEmits(['refreshing'])
+let emit = defineEmits(['refreshing','deletedProduct'])
 
 let loading = ref(false)
 let acceptLoading = ref(false)
@@ -205,11 +205,10 @@ async function deleteProduct () {
       headers: {
         credentials: 'include'
       },
-      body: props.product
+      body: { id: props.product._id }
     })
 
     emit('deletedProduct')
-    showToast('محصول مورد نظر شما حذف شد')
   } catch (error) {
     showToast('error', 'خطا', error.data.message)
   } finally {

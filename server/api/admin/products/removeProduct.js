@@ -5,7 +5,7 @@ export default defineEventHandler(async event => {
 
   try {
     let data = await $fetch(
-      `${config.public.API_BASE_URL}/admin/removeProduct/${body._id}`,
+      `${config.public.API_BASE_URL}/admin/removeProduct/${body.id}`,
       {
         method: 'DELETE',
         headers: {

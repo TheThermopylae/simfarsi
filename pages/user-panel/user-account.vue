@@ -7,7 +7,14 @@
         <UserDashboardUserAccountIdoknowSlider />
         <UserDashboardUserAccountBestServices />
         <UserDashboardUserAccountInviteFriend />
-        <UserDashboardUserAccountServicesSection />
+        <UserDashboardServicesSection>
+          <template #title1> اعتبار خرید کالا </template>
+          <template #p1> تا سقف 100 میلیون تومان</template>
+          <template #title2>پرداخت اقساط</template>
+          <template #p2> باز پرداخت اقساط اعتباری</template>
+          <template #title3>سیستم کسب در آمد </template>
+          <template #p3> با بازی کردن پول در بیار</template>
+        </UserDashboardServicesSection>
         <UserDashboardUserAccountMyOrders />
       </div>
       <AdSection>

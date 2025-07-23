@@ -12,7 +12,7 @@ useHead({
 </script>
 
 <style>
-.page-enter-active,
+/* .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;
 }
@@ -20,7 +20,7 @@ useHead({
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
-}
+} */
 
 .v-enter-active,
 .v-leave-active {

@@ -128,6 +128,7 @@ async function sendPost () {
 
     formData.append('caption', props.data.caption.trim())
     formData.append('hashtags', props.data.hashtags)
+    formData.append('isStory', true)
     props.data.img.forEach((file, index) => {
       formData.append(`img[${index}]`, file)
     })

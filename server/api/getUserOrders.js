@@ -3,7 +3,7 @@ export default defineEventHandler(async event => {
   let config = useRuntimeConfig()
 
   try {
-    let data = await $fetch(`${config.public.API_BASE_URL}/user/orderuser`, {
+    let data = await $fetch(`${config.public.API_BASE_URL}/user/transaction`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

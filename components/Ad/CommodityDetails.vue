@@ -45,20 +45,19 @@
       class="w-full"
       :pt="{
         option: ({ context }) => ({
-          class: context.selected ? '!bg-black !text-white' : ''
+          class: context.selected ? '!bg-black !text-white !rounded-xl' : ''
         }),
         root: '!p-5 !bg-[#F8F8F8] !text-xs !rounded-2xl !mt-3',
         label: '!p-0',
-        dropdownIcon: '!hidden'
+        dropdownIcon: '!text-black',
+        overlay: '!bg-[#F8F8F8] !text-xs !rounded-2xl !border-none'
       }"
     />
   </div>
   <div class="mb-4">
     <label class="font-peydaB text-xs">عکس آگهی</label>
     <AdUploadPic @selectedFile="selectFileFunc"></AdUploadPic>
-    <p class="text-red-500 text-2sm" v-if="!showImg">
-      افزودن یک عکس الزامیست
-    </p>
+    <p class="text-red-500 text-2sm" v-if="!showImg">افزودن یک عکس الزامیست</p>
     <div class="flex items-center gap-3" v-else>
       <Image
         :src="showImg"
@@ -120,7 +119,6 @@ function selectFileFunc (item) {
 
   props.data.img = item
 
-  // اگر فایل انتخاب شده است، آن را به Base64 تبدیل می‌کنیم
   if (item instanceof File) {
     const reader = new FileReader()
 
@@ -135,7 +133,6 @@ function selectFileFunc (item) {
 
     reader.readAsDataURL(item)
   } else if (typeof item === 'string') {
-    // اگر از قبل Base64 است
     showImg.value = item
   }
 }

@@ -9,9 +9,16 @@
         <div class="flex gap-2 items-center">
           <div class="relative">
             <NuxtImg
-              src="/avatar.svg"
+              v-if="userData?.avatar"
+              :src="`${$config.public.API_BASE_URL}${userData.avatar}`"
               alt="avatar"
-              class="w-[40px] h-[40px] rounded-full"
+              class="size-[40px] rounded-full"
+            ></NuxtImg>
+            <NuxtImg
+              v-else
+              src="/avatar.png"
+              alt="avatar"
+              class="size-[40px] rounded-full"
             ></NuxtImg>
             <div
               class="w-3 h-3 primary rounded-full flex justify-center items-center absolute -bottom-1"
@@ -32,20 +39,14 @@
               </svg>
             </div>
           </div>
-          <NuxtLink to="/" class="primary rounded-full px-4 py-1.5 text-xs"
+          <NuxtLink
+            to="/user-panel/dashboard"
+            class="primary rounded-full px-4 py-1.5 text-xs"
             >فروشگاه من</NuxtLink
           >
         </div>
         <div class="flex gap-2">
           <div class="relative flex-grow">
-            <!-- <input
-              @keydown.{keyAlias}.enter="searchHashtag"
-              v-model="hashtagValue"
-              type="text"
-              id="search"
-
-              placeholder="#هشتگ"
-            /> -->
             <NuxtLink
               to="/media"
               class="bg-[#F8F8F8] rounded-full flex-center py-1.5 h-[35px] w-[160px] px-2 text-xs"
@@ -165,23 +166,11 @@
 <script setup>
 let route = useRoute()
 
-let hashtagValue = ref('')
+let { userData } = userAuth()
 
 const visibleBottom = ref(false)
 const value = ref([0, 200])
 let numberValue = ref(null)
-
-async function searchHashtag () {
-  if (hashtagValue.value)
-    await navigateTo({
-      path: '/media',
-      query: {
-        hashtag: hashtagValue.value
-      }
-    })
-
-  hashtagValue.value = ''
-}
 
 let scrolled = ref(null)
 

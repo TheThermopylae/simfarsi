@@ -1,18 +1,28 @@
 export default defineEventHandler(async event => {
   let token = getCookie(event, 'token')
-  let body = await readBody(event)
   let config = useRuntimeConfig()
+  let formData = await readMultipartFormData(event)
+  const form = new FormData()
 
-  let data = await $fetch(
-    `${config.public.API_BASE_URL}/user/post/${body.id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      method: 'PUT',
-      body
-    }
-  )
+  formData.forEach(item => {
+    form.append(item.name, item.data)
+  })
 
-  return data
+  try {
+    let backendResponse = await fetch(
+      `${config.public.API_BASE_URL}/user/post/${form.get('id')}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: form
+      }
+    )
+
+    const result = await backendResponse.json()
+    return result
+  } catch (error) {
+    return error
+  }
 })

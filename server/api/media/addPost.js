@@ -32,10 +32,7 @@ export default defineEventHandler(async event => {
         },
         body: form
       }
-    )
-
-    console.log(form);
-    
+    )    
 
     const result = await backendResponse.json()
     return result

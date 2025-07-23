@@ -44,8 +44,12 @@ async function payFunc () {
     })
 
     console.log(data)
+    localStorage.setItem(
+      'product',
+      JSON.stringify({ totalPrice: 0, products: [] })
+    )
   } catch (error) {
-    console.log(data)
+    console.log(error)
   } finally {
     loading.value = false
   }

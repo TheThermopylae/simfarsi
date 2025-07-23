@@ -30,7 +30,6 @@ export default defineEventHandler(async event => {
     const result = await backendResponse.json()
     return result
   } catch (error) {
-    console.error(error)
     return { statusCode: 500, message: 'مشکلی در ارسال به سرور رخ داد.' }
   }
 })

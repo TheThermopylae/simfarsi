@@ -24,6 +24,44 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "PeydaWebFaNum-Medium";
+    src: url("/public/fonts/ttf/PeydaWebFaNum-Medium.ttf") format('ttf');
+    font-display: swap;
+
+}
+
+@font-face {
+    font-family: "PeydaWebFaNum-Bold";
+    src: url("/public/fonts/ttf/PeydaWebFaNum-Bold.ttf") format('ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "PeydaWebFaNum-Black";
+    src: url("/public/fonts/ttf/PeydaWebFaNum-Black.ttf") format('ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "PeydaWebFaNum-Medium";
+    src: url("/public/fonts/woff2/PeydaWebFaNum-Medium.woff2") format('woff2');
+    font-display: swap;
+
+}
+
+@font-face {
+    font-family: "PeydaWebFaNum-Bold";
+    src: url("/public/fonts/woff2/PeydaWebFaNum-Bold.woff2") format('woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "PeydaWebFaNum-Black";
+    src: url("/public/fonts/woff2/PeydaWebFaNum-Black.woff2") format('woff2');
+    font-display: swap;
+}
+
 * {
     outline: none;
 }

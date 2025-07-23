@@ -9,7 +9,7 @@
       alt="product-image"
       preview
     />
-    <NuxtLink to="/" class="text-[#8C8E91] text-[8px]">زن</NuxtLink>
+    <NuxtLink to="/" class="text-[#8C8E91] text-[8px]">کنسول</NuxtLink>
     <h1>{{ props.data.title }}</h1>
     <div class="mt-3">
       <h2 class="text-xs mb-2">توضیحات محصول</h2>

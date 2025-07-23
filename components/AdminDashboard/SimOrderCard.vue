@@ -37,53 +37,32 @@
         }"
       ></span>
     </h4>
-    <section class="grid grid-cols-2 gap-2 mt-3 text-2sm text-center">
-      <div
-        v-for="item in props.data.products"
-        :key="item._id"
-        class="flex flex-col h-full"
+    <div class="text-center text-sm">
+      <img :src="`/simlogo/${props.data.productID.Operator}.png`" alt="" />
+      <NuxtLink
+        :to="{
+          path: '/simcard',
+          query: {
+            uid: props.data.productID.uid,
+            title: props.data.productID.title
+          }
+        }"
+        class="my-2 font-peydaB underline"
+        >{{ props.data.productID.title }}</NuxtLink
       >
-        <div class="aspect-square overflow-hidden rounded-md">
-          <Image
-            pt:root="!size-full"
-            pt:image="!object-cover !size-full"
-            pt:rotateRightButton="!hidden"
-            pt:rotateLeftButton="!hidden"
-            pt:original="!rounded-md"
-            :src="`${$config.public.API_BASE_URL}${item.productID.img}`"
-            :alt="item._id"
-            preview
-          />
-        </div>
-        <NuxtLink
-          :to="{
-            path: item.productID.division == 'sim' ? '/simcard' : '/digital',
-            query: {
-              uid: item.productID.uid,
-              title: item.productID.title
-            }
-          }"
-          class="my-2 font-peydaB underline"
-          >{{ item.productID.title }}</NuxtLink
-        >
-        <h4 class="mb-2">
-          قیمت واحد :
-          <span class="font-peydaB"
-            >{{ item.unitPrice.toLocaleString() }} تومان</span
-          >
-        </h4>
-        <h4 class="mb-2">
-          تعداد :
-          <span class="font-peydaB">{{ item.count }} عدد</span>
-        </h4>
-        <h4>
-          قیمت نهایی :
-          <span class="font-peydaB"
-            >{{ (item.count * item.unitPrice).toLocaleString() }} تومان</span
-          >
-        </h4>
-      </div>
-    </section>
+      <h5 class="my-2">
+        شماره :<span> {{ props.data.productID.phone }}</span>
+      </h5>
+      <h5 class="my-2">
+        وضعیت سیمکارت :<span> {{ props.data.productID.simstatus }}</span>
+      </h5>
+      <h5 class="my-2">
+        فروش :<span> {{ props.data.productID.sale }}</span>
+      </h5>
+      <h5>
+        نوع شماره :<span> {{ props.data.productID.Numbertype }}</span>
+      </h5>
+    </div>
     <Toast />
   </article>
 </template>
@@ -114,3 +93,13 @@ async function changeStatus () {
   }
 }
 </script>
+
+<style scoped>
+h5 {
+  font-family: 'PeydaWebFaNum-Bold';
+}
+
+span {
+  font-family: 'PeydaWebFaNum-Medium';
+}
+</style>

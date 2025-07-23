@@ -8,6 +8,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware : 'basket'
+})
+
 useHead({
   title: '| انتخاب آدرس و پرداخت'
 })

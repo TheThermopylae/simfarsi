@@ -3,8 +3,8 @@
     <MediaStorySlider />
     <section>
       <MediaPost
-        v-if="posts"
-        v-for="item in posts.data"
+        v-if="posts.posts"
+        v-for="item in posts.posts"
         :data="item"
         @success="showSuccessRemovePost"
         @error="
@@ -37,9 +37,12 @@ useHead({
 
 let { showToast } = useToastComp()
 
-let { data: posts, refresh } = await useFetch('/api/media/getPosts', {
+let { data: posts, refresh } = await useFetch('/api/media/feed', {
   credentials: 'include'
 })
+
+console.log(posts.value);
+
 
 let postData = reactive({
   caption: '',

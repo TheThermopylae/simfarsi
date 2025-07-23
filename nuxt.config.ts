@@ -30,7 +30,7 @@ export default defineNuxtConfig({
         { rel: 'icon', href: '/logo.svg' }
       ]
     },
-    pageTransition: { name: 'page', mode: 'out-in' }
+    // pageTransition: { name: 'page', mode: 'out-in' }
   },
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
@@ -57,7 +57,7 @@ export default defineNuxtConfig({
     quality: 50
   },
   runtimeConfig: {
-    API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3000/',
+    API_BASE_URL: process.env.API_BASE_URL || 'https://api.simcart.shop',
     public: {
       API_BASE_URL: process.env.API_BASE_URL
     },

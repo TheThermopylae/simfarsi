@@ -2,10 +2,10 @@
   <section class="flex justify-between items-ceter gap-2">
     <div class="flex gap-2 w-1/3">
       <div>
-        <h4 class="text-xs font-peydaBlack">امیر برزگر ابرغانی</h4>
-        <p class="text-2sm">09120142811</p>
+        <h4 class="text-xs font-peydaBlack">{{ userData.username }}</h4>
+        <p class="text-2sm">{{ userData.phone }}</p>
       </div>
-      <div>
+      <NuxtLink to="/user-panel/edit-profile">
         <svg
           width="12"
           height="12"
@@ -19,7 +19,7 @@
           />
         </svg>
         <span class="relative bottom-2 text-[5px]">ویرایش</span>
-      </div>
+      </NuxtLink>
     </div>
     <Transition>
       <div
@@ -51,4 +51,6 @@
 
 <script setup>
 let showAlert = ref(true)
+
+let { userData } = userAuth()
 </script>

@@ -3,7 +3,6 @@ export default defineEventHandler(async event => {
   let config = useRuntimeConfig()
   let formData = await readMultipartFormData(event)
   const form = new FormData()
-  
 
   formData.forEach(item => {
     if (item.type) {
@@ -16,6 +15,8 @@ export default defineEventHandler(async event => {
     }
   })
 
+  // let body = await readBody(event)
+
   try {
     let backendResponse = await fetch(
       `${config.public.API_BASE_URL}/user/profile`,
@@ -24,7 +25,7 @@ export default defineEventHandler(async event => {
         headers: {
           Authorization: `Bearer ${token}`
         },
-        body: form
+        body : form
       }
     )
 

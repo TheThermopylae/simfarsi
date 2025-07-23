@@ -47,33 +47,37 @@
         </NuxtLink>
       </div>
     </div>
-    <AdminDashboardProductsTable
-      :products="products.products"
-      v-if="products.products"
-      @acceptDelete="refreshProducts"
-    ></AdminDashboardProductsTable>
-    <Transition>
-      <div
-        class="w-full h-full fixed bg-white left-0 z-10 top-0 flex justify-center items-center flex-col text-purple-c"
-        v-if="loading"
-      >
-        <LoadingSpinner class="w-16 h-16 mb-4"></LoadingSpinner>
-        درحال دریافت اطلاعات...
-      </div>
-    </Transition>
+    <h2>سیمکارت ها</h2>
+    <section class="my-3">
+      <AdminDashboardSimCard
+        v-for="item in simProducts"
+        :key="item._id"
+        :data="item"
+        @changeAccept="refresh"
+        @deletedProduct="refreshingProducts"
+      />
+    </section>
+    <h2>دیجیتال</h2>
+    <section class="mt-3">
+      <AdminDashboardDigiCard
+        v-for="item in digiProducts"
+        :key="item._id"
+        :data="item"
+        @changeAccept="refresh"
+        @deletedProduct="refreshingProducts"
+      />
+    </section>
   </div>
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
-
 useHead({
   title: 'محصولات'
 })
 
-let loading = ref(false)
+let { showToast } = useToastComp()
 
-let { data: products, refresh: refreshProducts } = await useAsyncData(() =>
+let { data: products, refresh } = await useAsyncData(() =>
   $fetch('/api/admin/products/getProducts', {
     headers: {
       credentials: 'include'
@@ -81,5 +85,16 @@ let { data: products, refresh: refreshProducts } = await useAsyncData(() =>
   })
 )
 
-provide('refreshProducts', refreshProducts)
+let simProducts = computed(() =>
+  products.value.products.filter(product => product?.division == 'sim')
+)
+
+let digiProducts = computed(() =>
+  products.value.products.filter(product => product?.division == 'digi')
+)
+
+async function refreshingProducts () {
+  await refresh()
+  showToast('محصول مورد نظر شما حذف شد')
+}
 </script>

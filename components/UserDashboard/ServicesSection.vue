@@ -18,8 +18,8 @@
           </svg>
         </div>
         <div class="text-2sm">
-          <h4 class="font-peydaBlack text-sm">اعتبار خرید کالا</h4>
-          تا سقف 100 میلیون تومان
+          <h4 class="font-peydaBlack text-sm"><slot name="title1"></slot></h4>
+          <slot name="p1" />
         </div>
       </article>
       <article class="flex gap-2 items-center mb-5">
@@ -38,8 +38,8 @@
           </svg>
         </div>
         <div class="text-2sm">
-          <h4 class="font-peydaBlack text-sm">پرداخت اقساط</h4>
-          باز پرداخت اقساط اعتباری
+          <h4 class="font-peydaBlack text-sm"><slot name="title2" /></h4>
+          <slot name="p2" />
         </div>
       </article>
       <article class="flex gap-2 items-center">
@@ -58,8 +58,8 @@
           </svg>
         </div>
         <div class="text-2sm">
-          <h4 class="font-peydaBlack text-sm">سیستم کسب در آمد</h4>
-          با بازی کردن پول در بیار
+          <h4 class="font-peydaBlack text-sm"><slot name="title3" /></h4>
+          <slot name="p3" />
         </div>
       </article>
     </div>

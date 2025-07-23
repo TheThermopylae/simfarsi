@@ -104,6 +104,9 @@ let { data: posts } = await useFetch('/api/media/getPosts', {
   credentials: 'include'
 })
 
+console.log(posts.value);
+
+
 let { data: followers } = await useFetch('/api/media/getFollowers', {
   credentials: 'include'
 })

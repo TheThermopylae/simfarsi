@@ -3,7 +3,7 @@
     <h1>ثبت آگهی</h1>
     <section class="grid grid-cols-2 gap-1.5 my-4 px-3">
       <NuxtLink
-        to="/user/ad/commodity"
+        to="/user/ad/digital"
         class="h-[130px] border border-dashed rounded-2xl bg-[#F8F8F8] flex justify-center items-center"
         >آگهی کالا دیجیتال</NuxtLink
       >
