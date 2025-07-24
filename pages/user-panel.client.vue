@@ -6,10 +6,10 @@
 
 <script setup>
 definePageMeta({
-  middleware: 'not-logged'
+  middleware: ['not-logged', 'is-admin']
 })
 
 useHead({
-  titleTemplate : 'پنل کاربری %s'
+  titleTemplate: 'پنل کاربری %s'
 })
 </script>

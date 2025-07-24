@@ -1,5 +1,5 @@
 <template>
-  <section class="mt-10">
+  <section class="h-full">
     <div class="flex justify-between items-center container mb-5">
       <h2 class="text-xs">
         <span class="ml-2 text-xl font-peydaB"> شگفت انگیز</span>
@@ -21,7 +21,7 @@
         >
       </div>
     </div>
-    <div class="bg-[#EBEBEB] h-[180px] mb-20 px-3">
+    <div class="mb-20 px-3">
       <SimpleCardSlider />
     </div>
   </section>

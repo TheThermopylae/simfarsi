@@ -1,24 +1,30 @@
 <template>
-  <article>
-    <div
-      class="w[165px] h-[180px] bg-white rounded-xl flex items-center justify-center relative shadow-md"
+  <article
+    class="shadow-md bg-white rounded-xl p-3 min-h-[220px] max-h-[350px] flex flex-col justify-between"
+  >
+    <NuxtLink
+      :to="{
+        path: '/digital',
+        query: { uid: props.data.uid, title: props.data.title }
+      }"
     >
-      <img src="/iphone_15card.svg" alt="card-img" class="w-1/2" />
-      <span
-        class="font-peydaB absolute top-2 right-2 bg-gradient-to-l from-[#FF5790] to-[#F81140] text-white rounded-md rounded-br-none text-xs px-2 py-1"
-        >20%-</span
-      >
-    </div>
-    <h4 class="mt-2 text-xs">آیفون 16 256 گیگابایت</h4>
+      <div class="w-full aspect-square sm:aspect-[4/3]">
+        <img
+          :src="`${$config.public.API_BASE_URL}${props.data.img}`"
+          alt="card-img"
+          class="w-full h-full object-cover rounded-xl"
+        />
+      </div>
+      <h4 class="mt-2 text-xs">
+        {{ props.data.title }}
+      </h4>
+    </NuxtLink>
     <div class="flex justify-end gap-2 mt-4">
-      <del class="text-[#F1AEAE]">$20,000</del>
-      <span>$16,000</span>
+      <span>{{ props.data.price.toLocaleString() }} ت</span>
     </div>
   </article>
 </template>
 
-<style scoped>
-.relative {
-  box-shadow: 0 5px 10px 0 #00000014;
-}
-</style>
+<script setup>
+let props = defineProps(['data'])
+</script>

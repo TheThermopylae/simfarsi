@@ -20,6 +20,4 @@ let { data } = await useFetch('/api/index/getProduct', {
   method: 'POST',
   body: { uid: route.query.uid, title: route.query.title }
 })
-
-console.log(data.value)
 </script>

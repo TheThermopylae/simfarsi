@@ -83,7 +83,7 @@
 @utility container {
     margin: auto;
     padding-inline: 1rem;
-    max-width : 640px;
+    max-width: 640px;
 
     @variant sm {
         padding-inline: 2rem;
@@ -125,6 +125,17 @@ h2 {
 
 .req {
     @apply after:content-['*'] after:text-red-500 after:font-bold
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 /* PrimeVue Theming */

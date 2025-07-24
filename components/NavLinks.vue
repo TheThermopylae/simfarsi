@@ -1,17 +1,41 @@
 <template>
   <section class="container fixed left-1/2 -translate-x-1/2 bottom-3 z-10">
     <div
-      class="bg-[#F4F4F4] py-3 rounded-full shadow grid grid-cols-5 ustify-between"
+      class="bg-[#F4F4F4] py-3 rounded-full shadow grid grid-cols-4 ustify-between"
     >
       <NuxtLink
+        v-if="userData.role == 'ADMIN'"
         active-class="text-black"
-        :to="userData ? '/user-panel/user-account' : '/auth/register'"
-        class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
+        to="/admin-panel/orders"
+        class="text-[#767676] text-xs flex flex-col items-center gap-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="13px"
-          height="13px"
+          width="15px"
+          height="15px"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M8.557 2.75H4.682A1.93 1.93 0 0 0 2.75 4.682v3.875a1.94 1.94 0 0 0 1.932 1.942h3.875a1.94 1.94 0 0 0 1.942-1.942V4.682A1.94 1.94 0 0 0 8.557 2.75m10.761 0h-3.875a1.94 1.94 0 0 0-1.942 1.932v3.875a1.943 1.943 0 0 0 1.942 1.942h3.875a1.94 1.94 0 0 0 1.932-1.942V4.682a1.93 1.93 0 0 0-1.932-1.932m0 10.75h-3.875a1.94 1.94 0 0 0-1.942 1.933v3.875a1.94 1.94 0 0 0 1.942 1.942h3.875a1.94 1.94 0 0 0 1.932-1.942v-3.875a1.93 1.93 0 0 0-1.932-1.932M8.557 13.5H4.682a1.943 1.943 0 0 0-1.932 1.943v3.875a1.93 1.93 0 0 0 1.932 1.932h3.875a1.94 1.94 0 0 0 1.942-1.932v-3.875a1.94 1.94 0 0 0-1.942-1.942"
+          />
+        </svg>
+        پنل مدیریت
+      </NuxtLink>
+      <NuxtLink
+        v-else
+        active-class="text-black"
+        :to="userData ? '/user-panel/user-account' : '/auth/register'"
+        class="text-[#767676] text-xs flex flex-col items-center gap-1"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15px"
+          height="15px"
           viewBox="0 0 24 24"
         >
           <path
@@ -25,15 +49,15 @@
         </svg>
         حساب کاربری
       </NuxtLink>
-      <NuxtLink
+      <!-- <NuxtLink
         active-class="text-black"
         to="/admin-panel/users"
-        class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
+        class="text-[#767676] text-xs flex flex-col items-center gap-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="13px"
-          height="13px"
+          width="15px"
+          height="15px"
           viewBox="0 0 20 20"
         >
           <path
@@ -42,15 +66,15 @@
           />
         </svg>
         کالای دیجیتال
-      </NuxtLink>
+      </NuxtLink> -->
       <NuxtLink
         to="/user/ad"
-        class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
+        class="text-[#767676] text-xs flex flex-col items-center gap-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="13px"
-          height="13px"
+          width="15px"
+          height="15px"
           viewBox="0 0 24 24"
         >
           <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
@@ -67,12 +91,12 @@
       <NuxtLink
         to="/category/simcard"
         active-class="text-black"
-        class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
+        class="text-[#767676] text-xs flex flex-col items-center gap-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="13px"
-          height="13px"
+          width="15px"
+          height="15px"
           viewBox="0 0 24 24"
         >
           <path
@@ -84,12 +108,12 @@
       </NuxtLink>
       <NuxtLink
         to="/"
-        class="text-[#767676] text-[10px] flex flex-col items-center gap-1"
+        class="text-[#767676] text-xs flex flex-col items-center gap-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="13px"
-          height="13px"
+          width="15px"
+          height="15px"
           viewBox="0 0 24 24"
         >
           <path

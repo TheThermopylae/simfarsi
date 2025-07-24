@@ -50,6 +50,9 @@ let { data } = await useFetch('/api/index/getProduct', {
   }
 })
 
+console.log(data.value);
+
+
 const loading = ref(false)
 
 async function purchaseSimFunc () {

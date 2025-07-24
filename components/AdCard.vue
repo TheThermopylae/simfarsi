@@ -47,7 +47,7 @@
       <div v-else>
         <img
           :src="'/simlogo/' + props.data.Operator + '.png'"
-          alt="لوگو همراه اول"
+          :alt="'لوگو ' + props.data.Operator"
           class="size-[91px] rounded-md border border-gray-300"
         />
       </div>

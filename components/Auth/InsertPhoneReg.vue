@@ -1,9 +1,9 @@
 <template>
   <section class="mt-7">
-    <p class="font-peydaB">شماره موبایل خود را وارد کنید</p>
+    <p class="font-peydaB">فرم ثبت نام را پر کنید</p>
     <p class="my-8 text-[12px]">
-      برای استفاده از امکانات <strong>سیم کارت شاپ</strong>، لطفا شماره موبایل
-      خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد.
+      برای استفاده از امکانات <strong>سیم کارت شاپ</strong>، باید یک حساب
+      بزارید. کد تایید به شماره موبایل شما پیامک خواهد شد
     </p>
     <NuxtImg
       src="/auth/forget.svg"
@@ -11,12 +11,23 @@
       class="w-2/3 block m-auto"
     ></NuxtImg>
     <form @submit.prevent="sendPhone">
-      <input
-        v-model="phone"
+      <InputText
         type="number"
-        id="phone-number"
+        v-model="regData.phone"
         placeholder="شماره موبایل"
-        class="border border-[#6E6D6D] rounded w-full mt-20 mb-10 p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
+        class="border !border-[#6E6D6D] rounded w-full mt-10 mb-3 !p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
+      />
+      <InputText
+        type="number"
+        v-model="regData.codemeli"
+        placeholder="کد ملی"
+        class="border !border-[#6E6D6D] rounded w-full mb-3 !p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
+      />
+      <InputText
+        type="text"
+        v-model="regData.username"
+        placeholder="نام کاربری"
+        class="border !border-[#6E6D6D] rounded w-full mb-3 !p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
       />
       <button class="bg-black text-white rounded w-full p-2 text-xs">
         ورود به سیم شاپ
@@ -41,31 +52,32 @@ let config = useRuntimeConfig()
 
 let emit = defineEmits(['showOtpEmit'])
 
-let phone = ref('')
+let regData = reactive({
+  phone: '',
+  codemeli: '',
+  username: ''
+})
 
 async function sendPhone () {
-  let toStrNumber = String(phone.value)
-
   try {
-    if (!phone.value) {
+    if (!regData.phone || !regData.codemeli || !regData.username) {
       toast.add({
-        severity: 'error',
-        summary: 'خطا',
-        detail: 'لطفا شماره موبایل خود را وارد کنید',
+        severity: 'warn',
+        summary: 'هشدار',
+        detail: 'برای ساخت حساب باید تمامی فیلد ها را پر کنید!',
         life: 5000
       })
     } else {
       let data = await $fetch(`${config.public.API_BASE_URL}/auth/register`, {
         method: 'POST',
         body: {
-          phone: toStrNumber.startsWith('0') ? toStrNumber : 0 + toStrNumber
+          phone: regData.phone,
+          codemeli: regData.codemeli,
+          username: regData.username
         }
       })
 
-      emit(
-        'showOtpEmit',
-        toStrNumber.startsWith('0') ? toStrNumber : 0 + toStrNumber
-      )
+      emit('showOtpEmit', regData.phone)
     }
   } catch (err) {
     toast.add({

@@ -1,11 +1,6 @@
 <template>
   <article class="bg-white rounded-xl p-3 relative mb-3 last:mb-0">
     <div class="flex items-center gap-2 mb-2">
-      <!-- <img
-        :src="`${$config.public.API_BASE_URL}${props.data.img}`"
-        :alt="'محصول  ' + props.data.title"
-        class="size-[50px] rounded-md"
-      /> -->
       <Image
         pt:root="!size-[50px]"
         pt:image="!object-cover !size-full !rounded-md"
@@ -48,28 +43,63 @@
             v-text="props.data.isaccept ? 'تایید شده' : 'تایید نشده'"
           ></span>
         </h5>
-        <LoadingSpinner
-          v-if="acceptLoading"
-          class="w-3 h-3 mr-1"
-        ></LoadingSpinner>
-        <svg
-          v-else
-          @click="acceptProductFunc"
-          xmlns="http://www.w3.org/2000/svg"
-          width="1.3em"
-          height="1.3em"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M16.977 19.5A9 9 0 0 0 10 3.223M16.977 19.5V16m0 3.5H20.5M7 4.516a9 9 0 0 0 7 16.261M7 4.516V8m0-3.484H3.5"
-            color="currentColor"
-          />
-        </svg>
+        <div class="flex items-center gap-3">
+          <div>
+            <LoadingSpinner
+              v-if="amazingLoading"
+              class="w-3 h-3 mr-1"
+            ></LoadingSpinner>
+            <svg
+              @click="changeAmazing"
+              v-else
+              class="cursor-pointer"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.3em"
+              height="1.3em"
+              viewBox="0 0 24 24"
+              :class="{ 'text-yellow-500': props.data.isamazing }"
+            >
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              >
+                <path
+                  d="m21.92 16.88l1.32-9.95a.75.75 0 0 0-1.08-.78l-4.28 3.26a.75.75 0 0 1-1.09-.15l-4.23-6.18a.73.73 0 0 0-1.12 0L7.21 9.26a.75.75 0 0 1-1.09.15L1.84 6.15a.75.75 0 0 0-1.08.78l1.32 10"
+                />
+                <path
+                  d="M21 16.68H3a2.25 2.25 0 1 0 0 4.5h18a2.25 2.25 0 0 0 0-4.5"
+                />
+              </g>
+            </svg>
+          </div>
+          <div>
+            <LoadingSpinner
+              v-if="acceptLoading"
+              class="w-3 h-3 mr-1"
+            ></LoadingSpinner>
+            <svg
+              v-else
+              @click="acceptProductFunc"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.3em"
+              height="1.3em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M16.977 19.5A9 9 0 0 0 10 3.223M16.977 19.5V16m0 3.5H20.5M7 4.516a9 9 0 0 0 7 16.261M7 4.516V8m0-3.484H3.5"
+                color="currentColor"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
     <Toast />
@@ -124,13 +154,34 @@
 
 <script setup>
 let props = defineProps(['data'])
-let emit = defineEmits(['changeAccept', 'deletedProduct'])
+let emit = defineEmits(['changeAccept', 'deletedProduct', 'changeAmazing'])
 
 let { showToast } = useToastComp()
 
 let acceptLoading = ref(false)
+let amazingLoading = ref(false)
+
 let visible = ref(false)
 let removeLoading = ref(false)
+
+async function changeAmazing () {
+  try {
+    amazingLoading.value = true
+
+    let data = await $fetch('/api/admin/products/changeAmazing', {
+      method: 'POST',
+      credentials: 'include',
+      body: { id: props.data._id }
+    })
+
+    showToast(data.data)
+    emit('changeAmazing')
+  } catch (err) {
+    showToast('error', 'خطا', err.data)
+  } finally {
+    amazingLoading.value = false
+  }
+}
 
 async function acceptProductFunc () {
   try {

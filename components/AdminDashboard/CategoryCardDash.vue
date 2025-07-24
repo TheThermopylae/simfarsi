@@ -1,7 +1,12 @@
 <template>
   <div class="text-center">
     <div class="my-1">
-      <h4>دسته بندی {{ props.category.title }}</h4>
+      <img
+        :src="`${$config.public.API_BASE_URL}${props.category.img}`"
+        :alt="`عکس ${props.category.title}`"
+        class="size-30 rounded-full block m-auto"
+      />
+      <h4 class="my-2">دسته بندی {{ props.category.title }}</h4>
     </div>
     <div class="flex justify-center flex-row-reverse gap-2">
       <div class="lg:tooltip" data-tip="حذف دسته بندی">
@@ -46,7 +51,7 @@
       class="w-11/12 md:w-2/3 lg:w-2/5 xl:w-1/4"
     >
       <span class="text-surface-500 dark:text-surface-400 block mb-8"
-        >آیا میخواهید این دسته بندی <b>{{ props.category.title }}</b> را حذف
+        >آیا میخواهید دسته بندی <b>{{ props.category.title }}</b> را حذف
         کنید؟</span
       >
       <div class="grid grid-cols-2 gap-2">
@@ -130,7 +135,7 @@ let loadingEdit = ref(false)
 let visible = ref(false)
 let visibleEdit = ref(false)
 
-function closeEditModal(){
+function closeEditModal () {
   visibleEdit.value = false
   title.value = props.category.title
 }

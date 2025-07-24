@@ -11,15 +11,24 @@
       class="w-2/3 block m-auto"
     ></NuxtImg>
     <form @submit.prevent="sendPhone">
-      <input
-        v-model="phone"
+      <InputText
         type="number"
-        id="phone-number"
+        v-model="phone"
         placeholder="شماره موبایل"
-        class="border border-[#6E6D6D] rounded w-full mt-20 mb-10 p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
+        class="border !border-[#6E6D6D] rounded w-full mt-20 mb-10 !p-2.5 placeholder:text-[12px] text-left placeholder:text-right"
       />
-      <button class="bg-black text-white rounded w-full p-2 text-xs">
+      <button
+        v-if="!loading"
+        class="bg-black text-white rounded w-full p-2 text-xs"
+      >
         ورود به سیم شاپ
+      </button>
+      <button
+        v-else
+        disabled
+        class="bg-black text-white rounded w-full p-2 text-xs h-8 flex-center"
+      >
+        <LoadingSpinner class="w-3"></LoadingSpinner>
       </button>
       <NuxtLink class="mt-3 text-xs block" to="/auth/register"
         >حساب ندارید؟ یکی بسازید
@@ -43,9 +52,9 @@ let emit = defineEmits(['showOtpEmit'])
 
 let phone = ref('')
 
-async function sendPhone () {
-  let toStrNumber = String(phone.value)
+let loading = ref(false)
 
+async function sendPhone () {
   try {
     if (!phone.value) {
       toast.add({
@@ -55,17 +64,16 @@ async function sendPhone () {
         life: 5000
       })
     } else {
+      loading.value = true
+
       let data = await $fetch(`${config.public.API_BASE_URL}/auth/login`, {
         method: 'POST',
         body: {
-          phone: toStrNumber.startsWith('0') ? toStrNumber : 0 + toStrNumber
+          phone: phone.value
         }
       })
 
-      emit(
-        'showOtpEmit',
-        toStrNumber.startsWith('0') ? toStrNumber : 0 + toStrNumber
-      )
+      emit('showOtpEmit', phone.value)
     }
   } catch (err) {
     toast.add({
@@ -74,6 +82,8 @@ async function sendPhone () {
       detail: err,
       life: 5000
     })
+  } finally {
+    loading.value = false
   }
 }
 </script>

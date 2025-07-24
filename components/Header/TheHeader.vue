@@ -6,7 +6,7 @@
     <div class="container">
       <HeaderTopSection />
       <div class="flex justify-between items-center mt-3">
-        <div class="flex gap-2 items-center">
+        <div class="flex gap-2 items-center" v-if="userData">
           <div class="relative">
             <NuxtImg
               v-if="userData?.avatar"
@@ -45,6 +45,12 @@
             >فروشگاه من</NuxtLink
           >
         </div>
+        <NuxtLink
+          to="/auth/register"
+          class="primary rounded-full text-xs h-[35px] flex-center px-5"
+          v-else
+          >ساخت حساب</NuxtLink
+        >
         <div class="flex gap-2">
           <div class="relative flex-grow">
             <NuxtLink

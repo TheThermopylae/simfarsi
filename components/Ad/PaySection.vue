@@ -55,6 +55,7 @@ async function submitAd () {
         formData.append('ad_type', props.data.ad_type)
         formData.append('sale', props.data.sale)
         formData.append('division', props.data.division)
+        formData.append('role', props.data.role)
 
         let fetchData = await $fetch('/api/ad/addDigitalAd', {
           credentials: 'include',
@@ -76,7 +77,9 @@ async function submitAd () {
           })
         }
       } else {
-        showToast('آگهی ثبت شد، منتظر تایید ادمین باشید.(در حال هدایت به صفحه آگهی ها)')
+        showToast(
+          'آگهی ثبت شد، منتظر تایید ادمین باشید.(در حال هدایت به صفحه آگهی ها)'
+        )
         setTimeout(() => {
           return navigateTo('/user/myad')
         }, 5000)

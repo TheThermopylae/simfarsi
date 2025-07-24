@@ -4,6 +4,8 @@ export default defineEventHandler(async event => {
   let formData = await readMultipartFormData(event)
   const form = new FormData()
 
+  
+  
   formData.forEach(item => {
     if (item.type) {
       form.append(
@@ -14,6 +16,7 @@ export default defineEventHandler(async event => {
       form.append(item.name, item.data)
     }
   })
+  console.log(form);
 
   try {
     let backendResponse = await fetch(
@@ -30,7 +33,6 @@ export default defineEventHandler(async event => {
     const result = await backendResponse.json()
     return result
   } catch (error) {
-    console.error(error)
     return { statusCode: 500, message: 'مشکلی در ارسال به سرور رخ داد.' }
   }
 })

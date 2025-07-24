@@ -43,7 +43,8 @@ let commodityData = reactive({
   sale: 'نقد',
   price: '',
   img: '',
-  division: 'digi'
+  division: 'digi',
+  role : 'USER'
 })
 
 function chagngeTypeFunc (item) {

@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center justify-between">
-    <div class="flex gap-1">
+    <div class="flex gap-1" v-if="userData">
       <nuxtLink
-        to="/user-panel/settings"
+        to="/settings"
         class="w-[35px] h-[35px] bg-[#E5E7EB] flex justify-center items-center rounded-full"
         ><svg
           width="17"
@@ -61,8 +61,13 @@
         </svg>
       </nuxtLink>
     </div>
+    <div v-else></div>
     <NuxtLink to="/" class="text-c-primary !font-peydaB text-xl">
       Simcart<span class="text-black">.shop</span>
     </NuxtLink>
   </div>
 </template>
+
+<script setup>
+let { userData } = userAuth()
+</script>

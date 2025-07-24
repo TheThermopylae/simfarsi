@@ -45,7 +45,8 @@ let simcardData = reactive({
   simstatus: '',
   Numbertype: '',
   phone: '',
-  division: 'sim'
+  division: 'sim',
+  role: 'USER'
 })
 
 function chagngeTypeFunc (item) {

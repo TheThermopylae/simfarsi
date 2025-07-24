@@ -3,7 +3,7 @@
     <Image
       :src="`${$config.public.API_BASE_URL}${props.data.img}`"
       pt:image="!w-full !rounded-md"
-      pt:root="!w-full"
+      pt:root="!w-full !max-h-[665px]"
       pt:rotateRightButton="!hidden"
       pt:rotateLeftButton="!hidden"
       alt="product-image"

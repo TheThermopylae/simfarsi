@@ -1,30 +1,30 @@
 <template>
   <div>
-    <h1 class="text-2xl xl:text-3xl mb-5">افزودن دسته بندی</h1>
+    <h1 class="text-2xl xl:text-3xl mb-5">افزودن بنر</h1>
     <form @submit.prevent="addCategoryFunc" enctype="multipart/form-data">
       <div class="mt-2 mb-5 grid md:grid-cols-2 gap-5">
         <div>
-          <label for="category-name">عنوان دسته بندی</label>
+          <label for="title">عنوان </label>
           <input
             type="text"
             class="cinput set-ring mt-3"
-            id="category-name"
-            v-model="categoryData.title"
+            id="title"
+            v-model="bannerData.title"
           />
         </div>
         <div>
-          <label for="category-link">لینک دسته بندی</label>
+          <label for="href">لینک</label>
           <input
             type="text"
             class="cinput set-ring mt-3"
-            id="category-link"
-            v-model="categoryData.href"
+            id="href"
+            v-model="bannerData.href"
           />
         </div>
         <div>
-          <label for="product-image">تصویر</label>
+          <label for="image">تصویر</label>
           <input
-            id="product-image"
+            id="image"
             name="image"
             accept="image/*"
             type="file"
@@ -37,11 +37,10 @@
         v-if="showImage"
         :src="showImage"
         alt="product-img"
-        class="rounded-lg my-5 size-24"
+        class="rounded-lg my-5 w-48 h-24"
       />
       <button
         class="btn-c px-3 h-14 w-44 flex gap-2 items-center"
-        @click=""
         v-if="!loading"
       >
         <svg
@@ -58,7 +57,7 @@
             d="M12 4.5v15m7.5-7.5h-15"
           />
         </svg>
-        افزودن دسته بندی
+        افزودن بنر
       </button>
       <button
         class="btn-c h-14 w-44 flex gap-2 items-center"
@@ -74,10 +73,10 @@
 
 <script setup>
 useHead({
-  title: 'افزودن دسته بندی'
+  title: 'افزودن بنر'
 })
 
-let categoryData = ref({
+let bannerData = ref({
   title: '',
   href: '',
   img: ''
@@ -92,7 +91,7 @@ function handleImageUpload (event) {
   const file = event.target.files[0]
   if (!file) return
 
-  categoryData.value.img = file
+  bannerData.value.img = file
   const reader = new FileReader()
   reader.onload = e => {
     showImage.value = e.target.result
@@ -101,23 +100,19 @@ function handleImageUpload (event) {
 }
 
 async function addCategoryFunc () {
-  if (!categoryData.value.title || !categoryData.value.href)
-    showToast(
-      'warn',
-      'هشدار',
-      'برای افزودن دسته بندی باید یک عنوان و یک مسیر مشخص کنید'
-    )
+  if (!bannerData.value.title || !bannerData.value.href)
+    showToast('warn', 'هشدار', 'برای افزودن بنر باید تمامی فیلد هارا پر کنید')
   else {
     try {
       loading.value = true
 
       let formData = new FormData()
 
-      formData.append('title', categoryData.value.title)
-      formData.append('href', categoryData.value.href)
-      formData.append('img', categoryData.value.img)
+      formData.append('title', bannerData.value.title)
+      formData.append('href', bannerData.value.href)
+      formData.append('img', bannerData.value.img)
 
-      let data = await $fetch('/api/admin/categories/addCategory', {
+      let data = await $fetch('/api/admin/banners/addBanner', {
         method: 'POST',
         headers: {
           credentials: 'include'
@@ -125,7 +120,7 @@ async function addCategoryFunc () {
         body: formData
       })
 
-      showToast('success', 'موفقیت آمیز', 'دسته بندی شما با موفقیت اضافه شد')
+      showToast('success', 'موفقیت آمیز', 'بنر شما با موفقیت اضافه شد')
     } catch (error) {
       showToast('error', ' خطا', error)
     } finally {

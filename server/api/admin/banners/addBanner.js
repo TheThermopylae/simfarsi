@@ -17,7 +17,7 @@ export default defineEventHandler(async event => {
 
   try {
     let backendResponse = await fetch(
-      `${config.public.API_BASE_URL}/admin/category`,
+      `${config.public.API_BASE_URL}/admin/addbaner`,
       {
         method: 'POST',
         headers: {

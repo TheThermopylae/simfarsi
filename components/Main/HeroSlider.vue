@@ -1,5 +1,10 @@
 <template>
-  <swiper :pagination="true" :space-between="10" :modules="modules" class="mySwiper h-[192px]">
+  <swiper
+    :pagination="true"
+    :space-between="10"
+    :modules="modules"
+    class="mySwiper h-[192px] !mb-5"
+  >
     <swiper-slide class="rounded-2xl -mb-20"
       ><NuxtImg
         class="w-full h-full rounded-2xl -mb-20"
@@ -83,7 +88,6 @@ export default {
 
 <style>
 .swiper-pagination {
-  /* background: red; */
   position: relative;
   top: -40px !important;
 }
