@@ -1,5 +1,5 @@
 <template>
-  <section class="flex justify-between items-ceter gap-2">
+  <section class="flex justify-between items-ceter gap-2 mb-3">
     <div class="flex gap-2 w-1/3">
       <div>
         <h4 class="text-xs font-peydaBlack">{{ userData.username }}</h4>
@@ -21,36 +21,9 @@
         <span class="relative bottom-2 text-[5px]">ویرایش</span>
       </NuxtLink>
     </div>
-    <Transition>
-      <div
-        class="bg-[#f1f1f1] rounded-[10px] p-3 relative flex-gow min-w-2/3 text-[9px]"
-        v-if="showAlert"
-      >
-        <svg
-          @click="showAlert = false"
-          class="absolute left-1.5 top-3"
-          width="7"
-          height="7"
-          viewBox="0 0 5 5"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0.5 5L0 4.5L2 2.5L0 0.5L0.5 0L2.5 2L4.5 0L5 0.5L3 2.5L5 4.5L4.5 5L2.5 3L0.5 5Z"
-            fill="black"
-          />
-        </svg>
-        <p class="mb-2">
-          به منظور استفاده از خدمات سیم شاپ شما لازم به احراز هویت میباشد.
-        </p>
-        <p>اطلاعات خود را <b>تکمیل</b> کنید</p>
-      </div>
-    </Transition>
   </section>
 </template>
 
 <script setup>
-let showAlert = ref(true)
-
 let { userData } = userAuth()
 </script>

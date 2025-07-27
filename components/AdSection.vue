@@ -6,17 +6,15 @@
   </div>
   <section>
     <AdCard
-      v-for="item in data.products"
+      v-for="item in props.products"
       :key="item._id"
       :data="item"
-      v-if="data"
+      v-if="props.products"
     ></AdCard>
     <p v-else class="text-center text-sm">محصولی وجود ندارد</p>
   </section>
 </template>
 
 <script setup>
-let { data } = await useFetch('/api/admin/products/getProducts', {
-  credentials: 'include'
-})
+let props = defineProps(['products'])
 </script>

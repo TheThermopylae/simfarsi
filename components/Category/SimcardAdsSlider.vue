@@ -6,8 +6,8 @@
       :modules="modules"
       class="mySwiper !px-3 !pb-5"
     >
-      <swiper-slide v-for="item in 10">
-        <CategorySimCardAd></CategorySimCardAd>
+      <swiper-slide v-for="item in sims">
+        <CategorySimCardAd :sim="item" :key="item._id"></CategorySimCardAd>
       </swiper-slide>
     </swiper>
   </div>
@@ -26,8 +26,11 @@ export default {
     SwiperSlide
   },
   setup () {
+    let sims = inject('amazingSimProducts')
+
     return {
-      modules: [FreeMode]
+      modules: [FreeMode],
+      sims
     }
   }
 }

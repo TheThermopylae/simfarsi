@@ -9,10 +9,7 @@
     :modules="modules"
     class="mySwiper !px-4"
   >
-    <swiper-slide
-      class="!w-fit text-xs text-center"
-      v-for="item in data.categorys"
-    >
+    <swiper-slide class="!w-fit text-xs text-center" v-for="item in data.all">
       <img
         :src="`${$config.public.API_BASE_URL}${item.img}`"
         :alt="`عکس ${item.title}`"
@@ -32,7 +29,9 @@ import 'swiper/css/pagination'
 
 import { FreeMode } from 'swiper/modules'
 
-let { data } = await useFetch('/api/admin/categories/getCategory', {
+let config = useRuntimeConfig()
+
+let { data } = await useFetch(`${config.public.API_BASE_URL}/categorys`, {
   credentials: 'include'
 })
 

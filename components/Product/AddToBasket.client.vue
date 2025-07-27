@@ -84,10 +84,14 @@
         تومان</span
       >
     </p>
+    <Toast />
   </section>
 </template>
 
 <script setup>
+let { userData } = userAuth()
+let { showToast } = useToastComp()
+
 const props = defineProps(['data'])
 
 let localProducts = ref(
@@ -121,15 +125,23 @@ function calcPrice () {
 }
 
 function addToBasketFunc () {
-  localProducts.value.products.push({
-    id: props.data._id,
-    count: count.value,
-    price: props.data.price,
-    img : props.data.img,
-    title : props.data.title
-  })
+  if (!userData.value) {
+    showToast(
+      'warn',
+      'هشدار',
+      'برای افزودن محصول به سبد خرید باید ابتدا وارد حساب خود شوید'
+    )
+  } else {
+    localProducts.value.products.push({
+      id: props.data._id,
+      count: count.value,
+      price: props.data.price,
+      img: props.data.img,
+      title: props.data.title
+    })
 
-  calcPrice()
+    calcPrice()
+  }
 }
 
 function removeProductInBasket () {

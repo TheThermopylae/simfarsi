@@ -6,7 +6,8 @@
 
 <script setup>
 definePageMeta({
-  middleware: ['not-logged', 'is-admin']
+  middleware: ['not-logged', 'is-admin'],
+  redirect: '/user-panel/user-account'
 })
 
 useHead({

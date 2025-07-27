@@ -4,7 +4,7 @@
       class="bg-[#F4F4F4] py-3 rounded-full shadow grid grid-cols-4 ustify-between"
     >
       <NuxtLink
-        v-if="userData.role == 'ADMIN'"
+        v-if="userData?.role == 'ADMIN'"
         active-class="text-black"
         to="/admin-panel/orders"
         class="text-[#767676] text-xs flex flex-col items-center gap-1"
@@ -69,6 +69,8 @@
       </NuxtLink> -->
       <NuxtLink
         to="/user/ad"
+        :class="{ 'text-black': route.path.startsWith('/user/') }"
+        active-class="text-black"
         class="text-[#767676] text-xs flex flex-col items-center gap-1"
       >
         <svg
@@ -108,6 +110,7 @@
       </NuxtLink>
       <NuxtLink
         to="/"
+        active-class="text-black"
         class="text-[#767676] text-xs flex flex-col items-center gap-1"
       >
         <svg
@@ -129,6 +132,8 @@
 
 <script setup>
 let { userData } = userAuth()
+
+let route = useRoute()
 </script>
 
 <style scoped>

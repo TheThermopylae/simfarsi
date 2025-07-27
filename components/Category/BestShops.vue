@@ -7,6 +7,11 @@
 
 <script setup>
 useHead({
-  title : '| دسته بندی ها'
+  title: '| دسته بندی ها'
 })
+
+let config = useRuntimeConfig()
+let { data: shops } = await useFetch(`${config.public.API_BASE_URL}/stores`)
+
+provide('shops', shops)
 </script>

@@ -43,7 +43,7 @@
           </svg>
         </nuxtLink>
       </ClientOnly>
-      <nuxtLink
+      <!-- <nuxtLink
         to="/"
         class="w-[35px] h-[35px] bg-[#E5E7EB] flex-center rounded-full"
       >
@@ -59,7 +59,7 @@
             fill="#101011"
           />
         </svg>
-      </nuxtLink>
+      </nuxtLink> -->
     </div>
     <div v-else></div>
     <NuxtLink to="/" class="text-c-primary !font-peydaB text-xl">

@@ -12,8 +12,8 @@
 definePageMeta({
   layout: false,
   layoutTransition: { name: 'layout', mode: 'out-in' },
-  // redirect: '/admin-panel/orders',
-  // middleware: ['auth', 'admin-check']
+  redirect: '/admin-panel/orders',
+  middleware: ['not-logged', 'is-user']
 })
 useHead({
   titleTemplate: 'پنل مدیریت | %s'

@@ -4,8 +4,8 @@
       <MainHeroSlider></MainHeroSlider>
     </div>
     <MainTheCategories></MainTheCategories>
-    <AmazingSection v-if="amazingDigiProducts" class="mt-5"></AmazingSection>
-    <AdSection></AdSection>
+    <AmazingSection v-if="amazingDigiProducts" class="mt-10"></AmazingSection>
+    <AdSection :products="products.all"></AdSection>
   </main>
 </template>
 
@@ -16,12 +16,15 @@ useHead({
 
 let config = useRuntimeConfig()
 
-let { data: products } = await useFetch(`/api/admin/products/getProducts`, {
-  credentials: 'include'
-})
+let { data: products } = await useFetch(
+  `${config.public.API_BASE_URL}/simcard`,
+  {
+    credentials: 'include'
+  }
+)
 
 let amazingDigiProducts = computed(() =>
-  products.value.products.filter(
+  products.value.all.filter(
     product => product.isamazing && product.division == 'digi'
   )
 )

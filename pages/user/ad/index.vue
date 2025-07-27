@@ -13,10 +13,9 @@
         >آگهی سیم کارت</NuxtLink
       >
     </section>
-    <NuxtLink to="/" class="bg-[#F8F8F8] rounded-md p-3 block">
-      کارشناسی سیم کارت
-    </NuxtLink>
-    <NuxtLink to="/user/myad" class="mt-5 bg-[#F8F8F8] rounded-md p-3 block">آگهی های من</NuxtLink>
+    <NuxtLink to="/user/myad" class="mt-5 bg-[#F8F8F8] rounded-md p-3 block"
+      >آگهی های من</NuxtLink
+    >
   </div>
 </template>
 

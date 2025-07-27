@@ -17,7 +17,7 @@
         </div>
       </div>
     </section>
-    <ul class="container px-8">
+    <ul class="container px-8" v-if="userData?.role == 'USER'">
       <li class="border-b border-gray-300 mb-4">
         <NuxtLink
           to="/user-panel/user-account"

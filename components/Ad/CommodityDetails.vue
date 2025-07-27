@@ -38,8 +38,8 @@
   <div class="mb-4">
     <label for="number" class="font-peydaB text-xs"> دسته بندی</label>
     <Select
+    :options="category.all"
       v-model="props.data.category"
-      :options="category.categorys"
       optionLabel="title"
       placeholder="دسته بندی مرتبط با آگهی خود را انتخاب کنید"
       class="w-full"
@@ -108,9 +108,14 @@ let emit = defineEmits(['nextStep'])
 
 let { showToast } = useToastComp()
 
-let { data: category } = await useFetch('/api/admin/categories/getCategory', {
-  credentials: 'include'
-})
+let config = useRuntimeConfig()
+
+let { data: category } = await useFetch(
+  `${config.public.API_BASE_URL}/categorys`,
+  {
+    credentials: 'include'
+  }
+)
 
 let showImg = ref(null)
 

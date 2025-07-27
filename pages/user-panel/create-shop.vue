@@ -56,6 +56,7 @@
       <Select
         v-model="shopData.ostan"
         :options="states"
+        optionLabel="name"
         placeholder="استان محل فروشگاه خود را انتخاب کنید"
         class="w-full"
         :pt="{
@@ -74,6 +75,7 @@
       <Select
         v-model="shopData.shahr"
         :options="cities"
+        optionLabel="name"
         placeholder="استان محل فروشگاه خود را انتخاب کنید"
         class="w-full"
         :pt="{
@@ -138,8 +140,13 @@ let shopData = reactive({
   img: ''
 })
 
-let states = ref(['تهران', 'فارس', 'مازندران'])
-let cities = ref(['تهران', 'شیراز', 'کرج'])
+let { userData } = userAuth()
+
+let { data: states } = await useFetch(
+  'https://iranplacesapi.liara.run/api/provinces'
+)
+
+let cities = ref([])
 
 let showImg = ref('')
 let loading = ref(false)
@@ -186,8 +193,8 @@ async function addShop () {
       formData.append('phone', shopData.phone)
       formData.append('phonehome', shopData.phonehome)
       formData.append('shomedec', shopData.shomedec)
-      formData.append('ostan', shopData.ostan)
-      formData.append('shahr', shopData.shahr)
+      formData.append('ostan', shopData.ostan.name)
+      formData.append('shahr', shopData.shahr.name)
       formData.append('address', shopData.address)
       formData.append('img', shopData.img)
 
@@ -200,6 +207,7 @@ async function addShop () {
       showToast(
         'فروشگاه شما با موفقیت ساخته شد. درحال هدایت به داشبورد فروشگاه'
       )
+      userData.value.isshop = 0
       setTimeout(() => {
         return navigateTo('/')
       }, 5000)
@@ -210,6 +218,25 @@ async function addShop () {
     }
   }
 }
+watch(
+  () => shopData.ostan,
+  async newVal => {
+    if (newVal?.name) {
+      shopData.shahr = ''
+
+      try {
+        const data = await $fetch(
+          `https://iranplacesapi.liara.run/api/provinces/name/${newVal.name}/cities`
+        )
+        cities.value = data
+      } catch (error) {
+        console.error('خطا در گرفتن شهرها:', error)
+        cities.value = []
+      }
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <style scoped>

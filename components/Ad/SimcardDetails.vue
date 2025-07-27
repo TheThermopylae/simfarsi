@@ -57,12 +57,18 @@
   </div>
   <div class="mb-4">
     <label for="phone" class="font-peydaB text-xs">شماره</label>
-    <input
+    <!-- <input
       v-model="props.data.phone"
       type="number"
       id="phone"
       class="bg-[#F8F8F8] rounded-2xl p-5 block w-full mt-3 placeholder:text-xs placeholder:text-black text-xs"
       placeholder="شماره ی سیمکارت خود را بنویسید"
+    /> -->
+    <InputText
+      type="number"
+      v-model="props.data.phone"
+      placeholder="شماره موبایل"
+      pt:root="!border-0 !bg-[#F8F8F8] !rounded-2xl !p-5 !block !w-full !mt-3 placeholder:!text-xs placeholder:!text-black !text-xs !text-black"
     />
   </div>
   <div class="mb-4">

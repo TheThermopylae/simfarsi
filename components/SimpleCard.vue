@@ -1,6 +1,6 @@
 <template>
   <article
-    class="shadow-md bg-white rounded-xl p-3 min-h-[220px] max-h-[350px] flex flex-col justify-between"
+    class="shadow-md bg-white rounded-xl p-3 flex flex-col justify-between"
   >
     <NuxtLink
       :to="{
@@ -8,7 +8,7 @@
         query: { uid: props.data.uid, title: props.data.title }
       }"
     >
-      <div class="w-full aspect-square sm:aspect-[4/3]">
+      <div class="w-full aspect-square">
         <img
           :src="`${$config.public.API_BASE_URL}${props.data.img}`"
           alt="card-img"

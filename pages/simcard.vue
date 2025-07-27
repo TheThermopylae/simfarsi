@@ -2,7 +2,7 @@
   <div class="container" v-if="data && data?.division == 'sim'">
     <BackPage />
     <ProductPosterSection :data="data" />
-    <ProductCommunicationSection />
+    <!-- <ProductCommunicationSection /> -->
     <ProductSellDetails :data="data" />
     <ProductDetails :data="data" />
     <Button
@@ -12,18 +12,17 @@
       to="/"
       @click="purchaseSimFunc"
     />
-
-    <div class="flex justify-between items-center">
+    <!-- <div class="flex justify-between items-center">
       <h2 class="text-sm">پیشنهاد لحظه ای برای شما</h2>
       <NuxtLink to="/" class="text-2sm text-c-primary">مشاهده همه</NuxtLink>
     </div>
-    <SearchSpecialCard />
-    <div class="flex justify-between items-center">
+    <SearchSpecialCard /> -->
+    <!-- <div class="flex justify-between items-center">
       <h2 class="text-sm">محصولات پر طرفدار</h2>
       <NuxtLink to="/" class="text-2sm text-c-primary">مشاهده همه</NuxtLink>
-    </div>
-    <SimpleCardSlider></SimpleCardSlider>
-    <ProductNoteSection />
+    </div> -->
+    <!-- <SimpleCardSlider></SimpleCardSlider> -->
+    <!-- <ProductNoteSection /> -->
   </div>
   <div
     v-else
@@ -50,8 +49,7 @@ let { data } = await useFetch('/api/index/getProduct', {
   }
 })
 
-console.log(data.value);
-
+console.log(data.value)
 
 const loading = ref(false)
 

@@ -40,7 +40,12 @@
             </div>
           </div>
           <NuxtLink
-            to="/user-panel/dashboard"
+            v-if="userData?.role"
+            :to="
+              userData?.isshop == 1
+                ? '/user-panel/create-shop'
+                : '/user-panel/user-account'
+            "
             class="primary rounded-full px-4 py-1.5 text-xs"
             >فروشگاه من</NuxtLink
           >

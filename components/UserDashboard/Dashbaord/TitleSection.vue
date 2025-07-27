@@ -1,7 +1,7 @@
 <template>
   <section class="flex justify-between items-center">
     <h1 class="text-sm">مدیریت فروشگاه {{ props.data.nameshop }}</h1>
-    <NuxtLink to="/" class="flex items-center gap-2 text-2sm">
+    <!-- <NuxtLink to="/" class="flex items-center gap-2 text-2sm">
       پشتیبانی
       <svg
         width="20"
@@ -15,7 +15,7 @@
           fill="black"
         />
       </svg>
-    </NuxtLink>
+    </NuxtLink> -->
   </section>
 </template>
 
