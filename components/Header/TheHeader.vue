@@ -110,16 +110,16 @@
       :pt="{
         header: '!pt-6',
         title: '!text-[20px]',
-        root: '!rounded-t-[50px]'
+        root: '!rounded-t-[50px] !max-h-screen'
       }"
     >
       <template #closebutton>
         <button class="btn-c px-5 py-1">حذف فیلتر</button>
       </template>
-      <div>
+      <!-- <div>
         <h4 class="text-gray-400 text-xs">دسته بندی ها</h4>
         <HeaderCategorySlider />
-      </div>
+      </div> -->
       <div class="my-5">
         <h4 class="mb-3">رنج قیمت</h4>
         <Slider
@@ -131,12 +131,12 @@
           v-model="value"
           range
           class="w-56"
-          :min="0"
-          :max="10000"
+          :min="100_000"
+          :max="100_000_000"
         />
         <div class="flex justify-between mt-2">
-          <span>{{ value[1] }}$</span>
-          <span>{{ value[0] }}$</span>
+          <span>تومان {{ value[1].toLocaleString() }}</span>
+          <span>تومان {{ value[0].toLocaleString() }}</span>
         </div>
       </div>
       <div class="my-5">
@@ -155,35 +155,121 @@
       <div class="my-5">
         <label for="status" class="mb-3 block text-xs">وضعیت</label>
         <input
+          v-model="data.simstatus"
           type="text"
           id="status"
           class="bg-[#F4F4F4] w-full p-2 rounded"
         />
       </div>
       <div class="my-5">
-        <label for="type" class="mb-3 block text-xs">نوع رند</label>
-        <input type="text" id="type" class="bg-[#F4F4F4] w-full p-2 rounded" />
+        <label class="mb-3 block text-xs">اوپراتور</label>
+        <Select
+          v-model="data.Operator"
+          :options="operators"
+          class="w-full"
+          :pt="{
+            option: ({ context }) => ({
+              class: context.selected ? '!bg-black !text-white' : ''
+            }),
+            root: '!bg-[#f4f4f4]'
+          }"
+        />
       </div>
+      <div class="my-5">
+        <label class="mb-3 block text-xs">نوع سیم کارت</label>
+        <Select
+          v-model="data.Numbertype"
+          :options="types"
+          class="w-full"
+          :pt="{
+            option: ({ context }) => ({
+              class: context.selected ? '!bg-black !text-white' : ''
+            }),
+            root: '!bg-[#f4f4f4]'
+          }"
+        />
+      </div>
+      <div class="my-5">
+        <label class="mb-3 block text-xs">فروش</label>
+        <Select
+          v-model="data.sale"
+          :options="saleTypes"
+          class="w-full"
+          :pt="{
+            option: ({ context }) => ({
+              class: context.selected ? '!bg-black !text-white' : ''
+            }),
+            root: '!bg-[#f4f4f4]'
+          }"
+        />
+      </div>
+      <button class="w-full rounded-full primary p-4 mt-7" @click="filter">
+        اعمال فیلترها
+      </button>
       <button
-        class="w-full rounded-full primary p-4 mt-7"
+        class="w-full rounded-full border text-black p-4 mt-3"
         @click="visibleBottom = false"
       >
-        اعمال فیلترها
+        بستن
       </button>
     </Drawer>
   </header>
 </template>
 
 <script setup>
-let route = useRoute()
+let router = useRouter()
 
 let { userData } = userAuth()
 
+let types = ref(['اعتباری', 'دائمی'])
+let operators = ref(['ایرانسل', 'همراه اول', 'رایتل'])
+let saleTypes = ref(['نقد', 'اقساط', 'نقد و اقساط'])
+
 const visibleBottom = ref(false)
-const value = ref([0, 200])
+const value = ref([100_000, 50_000_000])
 let numberValue = ref(null)
 
+let data = reactive({
+  number: '',
+  simstatus: '',
+  sale: '',
+  Operator: '',
+  Numbertype: '',
+  minprice: value.value[0],
+  maxprice: value.value[1]
+})
+
 let scrolled = ref(null)
+
+function buildQueryParams () {
+  const queries = {}
+
+  // اضافه کردن رنج قیمت
+  // queries.minprice = value.value[0]
+  // queries.maxprice = value.value[1]
+
+  // اضافه کردن شماره سیم کارت اگر وجود دارد
+  if (numberValue.value) {
+    queries.number = `0912${numberValue.value}`
+  }
+
+  // اضافه کردن سایر فیلترها اگر پر شده باشند
+  if (data.simstatus) queries.simstatus = data.simstatus
+  if (data.Operator) queries.Operator = data.Operator
+  if (data.Numbertype) queries.numbertype = data.Numbertype
+  if (data.sale) queries.sale = data.sale
+
+  return queries
+}
+
+function filter () {
+  const queryParams = buildQueryParams()
+  router.push({
+    path: '/search',
+    query: queryParams
+  })
+  visibleBottom.value = false
+}
 
 onMounted(() => {
   const handleScroll = () => {

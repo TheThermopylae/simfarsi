@@ -29,7 +29,7 @@
         :pt="{
           option: ({ context }) => ({
             class: context.selected ? '!bg-black !text-white' : ''
-          }),
+          })
         }"
       />
     </div>

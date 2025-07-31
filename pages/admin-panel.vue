@@ -2,7 +2,7 @@
   <div>
     <NuxtLayout name="admin-panel">
       <NuxtPage
-        class="lg:w-3/4 xl:w-4/5 p-5 lg:p-8 lg:absolute lg:left-0 lg:top-0 min-h-screen bg-sec dark:bg-dark-c"
+        class="lg:w-3/4 xl:w-4/5 p-5 lg:p8 lg:absolute lg:left-0 lg:top-0 min-h-screen bg-sec dark:bg-dark-c"
       />
     </NuxtLayout>
   </div>
